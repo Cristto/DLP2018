@@ -1,0 +1,22 @@
+// Tipos simples ---------
+var a:int;
+var b:char;
+
+// Arrays ---------
+var c:[5] float;
+var h:[3][2] float;  // Pueden ser más de 2 dimensiones
+
+
+
+
+// Combinación de Arrays y Structs -------------
+var f:[6] Persona;
+
+
+
+//// ------------------------------
+//// DEFINICIONES de funciones
+
+dobleSuma(a:int, b:int): int {
+
+}
