@@ -1,16 +1,22 @@
 package semantico;
 
-import java.util.*;
-
-import ast.*;
-import main.*;
-import visitor.*;
+import ast.DefFuncion;
+import ast.Invocacion;
+import ast.LlamadaFuncion;
+import ast.Position;
+import main.GestorErrores;
+import semantico.context.ContextMap;
+import visitor.DefaultVisitor;
 
 
 public class Identificacion extends DefaultVisitor {
+	
+	private GestorErrores gestorErrores;
+	private ContextMap<String, DefFuncion> funciones = new ContextMap<String,DefFuncion>();
 
 	public Identificacion(GestorErrores gestor) {
 		this.gestorErrores = gestor;
+		
 	}
 
 	
@@ -23,8 +29,39 @@ public class Identificacion extends DefaultVisitor {
 	// public Object visit(Programa prog, Object param) {
 	// ...
 	// }
-
 	
+	public Object visit(DefFuncion node, Object param) {
+
+		if(funciones.getFromAny(node.getIdent()) == null)
+			funciones.put(node.getIdent(), node);			
+		else
+			gestorErrores.error("Identificación", "funcion repetida", node.getStart());
+		
+		funciones.set();
+		super.visit(node, param);
+		funciones.reset();
+		return null;
+	}
+	
+	public Object visit(Invocacion node, Object param){
+		if(funciones.getFromAny(node.getIdent()) == null)
+			gestorErrores.error("Identificación", "Procedimiento no definido", node.getStart());
+		else			
+			node.setDefFuncion(funciones.getFromAny(node.getIdent()));
+		
+		super.visit(node, param);
+		return null;
+	}
+	
+	public Object visit(LlamadaFuncion node, Object param){
+		if(funciones.getFromAny(node.getIdent()) == null)
+			gestorErrores.error("Identificación", "Función no definida", node.getStart());
+		else			
+			node.setDefFuncion(funciones.getFromAny(node.getIdent()));
+		
+		super.visit(node, param);
+		return null;
+	}
 	
 	
 	
@@ -48,5 +85,5 @@ public class Identificacion extends DefaultVisitor {
 	}
 
 
-	private GestorErrores gestorErrores;
+	
 }

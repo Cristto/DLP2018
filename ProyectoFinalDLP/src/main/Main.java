@@ -22,7 +22,7 @@ import ast.*;
  * 
  */
 public class Main {
-	public static final String programa = "src/ejemplo.txt";	// Entrada a usar durante el desarrollo
+	public static final String programa = "src/Tests/Funciones.txt";	// Entrada a usar durante el desarrollo
 
 	public static void main(String[] args) throws Exception {
 		GestorErrores gestor = new GestorErrores();
@@ -49,11 +49,11 @@ public class Main {
 			return null;
 
 		// 2. Fase de Análisis Semántico
-//		AnalisisSemantico semántico = new AnalisisSemantico(gestor);
-//		semántico.analiza(raiz);
-//		if (gestor.hayErrores())
-//			return raiz;
-//
+		AnalisisSemantico semántico = new AnalisisSemantico(gestor);
+		semántico.analiza(raiz);
+		if (gestor.hayErrores())
+			return raiz;
+
 //		// 3. Fase de Generación de Código
 //		File sourceFile = new File(sourceName);
 //		Writer out = new FileWriter(new File(sourceFile.getParent(), "salida.txt"));

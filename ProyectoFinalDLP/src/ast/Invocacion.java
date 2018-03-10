@@ -32,6 +32,14 @@ public class Invocacion extends AbstractStatement {
 	public void setIdent(String ident) {
 		this.ident = ident;
 	}
+	
+	public DefFuncion getDefFuncion() {
+		return defFuncion;
+	}
+	
+	public void setDefFuncion(DefFuncion defFuncion) {
+		this.defFuncion = defFuncion;
+	}
 
 	public List<Expression> getArgumentos() {
 		return argumentos;
@@ -47,5 +55,6 @@ public class Invocacion extends AbstractStatement {
 
 	private String ident;
 	private List<Expression> argumentos;
+	private DefFuncion defFuncion;
 }
 

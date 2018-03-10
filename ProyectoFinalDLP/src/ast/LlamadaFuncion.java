@@ -39,6 +39,13 @@ public class LlamadaFuncion extends AbstractExpression {
 	public void setArgumentos(List<Expression> argumentos) {
 		this.argumentos = argumentos;
 	}
+	
+	public DefFuncion getDefFuncion() {
+		return defFuncion;
+	}
+	public void setDefFuncion(DefFuncion defFuncion) {
+		this.defFuncion = defFuncion;
+	}
 
 	@Override
 	public Object accept(Visitor v, Object param) { 
@@ -47,5 +54,6 @@ public class LlamadaFuncion extends AbstractExpression {
 
 	private String ident;
 	private List<Expression> argumentos;
+	private DefFuncion defFuncion;
 }
 
