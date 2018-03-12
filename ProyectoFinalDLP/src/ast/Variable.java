@@ -26,6 +26,14 @@ public class Variable extends AbstractExpression {
 	public void setIdent(String ident) {
 		this.ident = ident;
 	}
+	
+	public DefVariable getDefVariable() {
+		return defVariable;
+	}
+	
+	public void setDefVariable(DefVariable defVariable) {
+		this.defVariable = defVariable;
+	}
 
 	@Override
 	public Object accept(Visitor v, Object param) { 
@@ -33,5 +41,6 @@ public class Variable extends AbstractExpression {
 	}
 
 	private String ident;
+	private DefVariable defVariable;
 }
 

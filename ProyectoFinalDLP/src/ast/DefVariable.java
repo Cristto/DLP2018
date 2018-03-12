@@ -37,6 +37,13 @@ public class DefVariable extends AbstractDefinition {
 	public void setTipo(Type tipo) {
 		this.tipo = tipo;
 	}
+	
+	public int getAmbito() {
+		return ambito;
+	}
+	public void setAmbito(int ambito) {
+		this.ambito = ambito;
+	}
 
 	@Override
 	public Object accept(Visitor v, Object param) { 
@@ -45,5 +52,6 @@ public class DefVariable extends AbstractDefinition {
 
 	private String ident;
 	private Type tipo;
+	private int ambito;
 }
 

@@ -1,9 +1,12 @@
 package semantico;
 
+import ast.ArrayTipo;
 import ast.DefFuncion;
+import ast.DefVariable;
 import ast.Invocacion;
 import ast.LlamadaFuncion;
 import ast.Position;
+import ast.Variable;
 import main.GestorErrores;
 import semantico.context.ContextMap;
 import visitor.DefaultVisitor;
@@ -13,6 +16,7 @@ public class Identificacion extends DefaultVisitor {
 	
 	private GestorErrores gestorErrores;
 	private ContextMap<String, DefFuncion> funciones = new ContextMap<String,DefFuncion>();
+	private ContextMap<String, DefVariable> variables = new ContextMap<String,DefVariable>();
 
 	public Identificacion(GestorErrores gestor) {
 		this.gestorErrores = gestor;
@@ -31,11 +35,9 @@ public class Identificacion extends DefaultVisitor {
 	// }
 	
 	public Object visit(DefFuncion node, Object param) {
-
-		if(funciones.getFromAny(node.getIdent()) == null)
-			funciones.put(node.getIdent(), node);			
-		else
-			gestorErrores.error("Identificación", "funcion repetida", node.getStart());
+		
+		predicado(funciones.getFromAny(node.getIdent()) == null, "funcion repetida", node.getStart());
+		funciones.put(node.getIdent(), node);
 		
 		funciones.set();
 		super.visit(node, param);
@@ -44,10 +46,9 @@ public class Identificacion extends DefaultVisitor {
 	}
 	
 	public Object visit(Invocacion node, Object param){
-		if(funciones.getFromAny(node.getIdent()) == null)
-			gestorErrores.error("Identificación", "Procedimiento no definido", node.getStart());
-		else			
-			node.setDefFuncion(funciones.getFromAny(node.getIdent()));
+		
+		predicado(funciones.getFromAny(node.getIdent()) != null, "Procedimiento no definido", node.getStart());
+		node.setDefFuncion(funciones.getFromAny(node.getIdent()));
 		
 		super.visit(node, param);
 		return null;
@@ -63,6 +64,37 @@ public class Identificacion extends DefaultVisitor {
 		return null;
 	}
 	
+	
+	public Object visit(DefVariable node, Object param){
+				
+		super.visit(node, param);
+		
+		if(node.getAmbito()==1)
+			predicado(variables.getFromAny(node.getIdent())==null,"Variable global "+node.getIdent()+" repetida",node.getStart());
+		else if(node.getAmbito()==2)
+			predicado(variables.getFromTop(node.getIdent())==null,"Parametro "+node.getIdent()+" repetido",node.getStart());		
+		else
+			predicado(variables.getFromTop(node.getIdent())==null,"Variable local "+node.getIdent()+" ya definida",node.getStart());
+		
+		
+		variables.put(node.getIdent(), node);
+		
+		return null;
+	}
+	
+	public Object visit(Variable node, Object param){
+		if (variables.getFromAny(node.getIdent()) == null)
+			gestorErrores.error("Identificación", "variable no definida", node.getStart());
+		else
+		    node.setDefVariable(variables.getFromAny(node.getIdent()));
+
+		return null;
+	}
+	
+	public Object visit(ArrayTipo node, Object param) {
+		node.getTipo().accept(this, param);
+		return null;
+	}
 	
 	
 	/**
