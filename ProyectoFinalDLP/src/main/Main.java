@@ -22,7 +22,11 @@ import ast.*;
  * 
  */
 public class Main {
-	public static final String programa = "src/Tests/Estructuras.txt";	// Entrada a usar durante el desarrollo
+	//public static final String programa = "src/Tests/Funciones.txt";	// Entrada a usar durante el desarrollo
+	//public static final String programa = "src/Tests/Estructuras.txt";
+	public static final String programa = "src/Tests/Variables.txt";
+	//public static final String programa = "src/ejemplo.txt";
+	//public static final String programa = "src/Tests/prueba.txt";
 
 	public static void main(String[] args) throws Exception {
 		GestorErrores gestor = new GestorErrores();

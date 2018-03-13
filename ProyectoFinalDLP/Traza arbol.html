@@ -21,52 +21,84 @@
 <body><pre>
 [ASTPrinter] -------------------------------- line:col  line:col
 
-<span class="dots"></span>Program &rarr;                                                   <span class="pos">10:8  30:18  </span><span class="sourceText">struct </span><span class="posText">Persona {</span><span class="sourceText"> ... </span><span class="posText">print centro.y</span><span class="sourceText">; // No error en esta fase aunque aunque el campo no está en la struct </span>
+<span class="dots"></span>Program &rarr;                                                   <span class="pos">9:5  41:17   </span><span class="sourceText">var </span><span class="posText">a:int;</span><span class="sourceText"> ... </span><span class="posText">dobleSuma(5.6</span><span class="sourceText">);    // No es error en esta fase aunque no coincidan parámetros </span>
 <span class="dots">·  </span>definiciones  <span class="type">List&lt;Definition&gt;</span> = 
-<span class="dots">·  ·  </span>DefStruct &rarr;                                           <span class="pos">10:8  13:8   </span><span class="sourceText">struct </span><span class="posText">Persona {</span><span class="sourceText"> ... </span><span class="posText">edad</span><span class="sourceText">:float;  // Campo repetido </span>
-<span class="dots">·  ·  |  </span><span class="null">null</span>  
-<span class="dots">·  ·  |  </span>campos  <span class="type">List&lt;Definition&gt;</span> = 
-<span class="dots">·  ·  |  ·  </span>DefCampo &rarr;                                      <span class="pos">11:5  11:8   </span><span class="sourceText"></span><span class="posText">edad</span><span class="sourceText">:int;</span>
-<span class="dots">·  ·  |  ·  |  </span>"<span class="value">edad</span>"  
-<span class="dots">·  ·  |  ·  |  </span><span class="null">null</span>  tipo:<span class="type">Type</span>
-<span class="dots">·  ·  |  ·  </span>DefCampo &rarr;                                      <span class="pos">12:5  12:13  </span><span class="sourceText"></span><span class="posText">meses:[12</span><span class="sourceText">] int;</span>
-<span class="dots">·  ·  |  ·  |  </span>"<span class="value">meses</span>"  
-<span class="dots">·  ·  |  ·  |  </span><span class="null">null</span>  tipo:<span class="type">Type</span>
-<span class="dots">·  ·  |  ·  </span>DefCampo &rarr;                                      <span class="pos">13:5  13:8   </span><span class="sourceText"></span><span class="posText">edad</span><span class="sourceText">:float;  // Campo repetido </span>
-<span class="dots">·  ·  |  ·  |  </span>"<span class="value">edad</span>"  
-<span class="dots">·  ·  |  ·  |  </span><span class="null">null</span>  tipo:<span class="type">Type</span>
-<span class="dots">·  ·  </span>DefVariable &rarr;                                         <span class="pos">16:5  16:17  </span><span class="sourceText">var </span><span class="posText">k:[10] Window</span><span class="sourceText">;    // Estructura no definida </span>
-<span class="dots">·  ·  |  </span>"<span class="value">k</span>"  
+<span class="dots">·  ·  </span>DefVariable &rarr;                                         <span class="pos">9:5  9:5     </span><span class="sourceText">var </span><span class="posText">a</span><span class="sourceText">:int;</span>
+<span class="dots">·  ·  |  </span>"<span class="value">a</span>"  
 <span class="dots">·  ·  |  </span><span class="null">null</span>  tipo:<span class="type">Type</span>
-<span class="dots">·  ·  </span>DefStruct &rarr;                                           <span class="pos">18:8  19:5   </span><span class="sourceText">struct </span><span class="posText">Persona {    // Estructura repetida </span><span class="sourceText"> ... </span><span class="posText">j</span><span class="sourceText">:int;</span>
-<span class="dots">·  ·  |  </span><span class="null">null</span>  
-<span class="dots">·  ·  |  </span>campos  <span class="type">List&lt;Definition&gt;</span> = 
-<span class="dots">·  ·  |  ·  </span>DefCampo &rarr;                                      <span class="pos">19:5  19:5   </span><span class="sourceText"></span><span class="posText">j</span><span class="sourceText">:int;</span>
-<span class="dots">·  ·  |  ·  |  </span>"<span class="value">j</span>"  
-<span class="dots">·  ·  |  ·  |  </span><span class="null">null</span>  tipo:<span class="type">Type</span>
-<span class="dots">·  ·  </span>DefStruct &rarr;                                           <span class="pos">22:8  23:5   </span><span class="sourceText">struct </span><span class="posText">Punto {</span><span class="sourceText"> ... </span><span class="posText">x</span><span class="sourceText">:int;</span>
-<span class="dots">·  ·  |  </span><span class="null">null</span>  
-<span class="dots">·  ·  |  </span>campos  <span class="type">List&lt;Definition&gt;</span> = 
-<span class="dots">·  ·  |  ·  </span>DefCampo &rarr;                                      <span class="pos">23:5  23:5   </span><span class="sourceText"></span><span class="posText">x</span><span class="sourceText">:int;</span>
-<span class="dots">·  ·  |  ·  |  </span>"<span class="value">x</span>"  
-<span class="dots">·  ·  |  ·  |  </span><span class="null">null</span>  tipo:<span class="type">Type</span>
-<span class="dots">·  ·  </span>DefVariable &rarr;                                         <span class="pos">26:5  26:16  </span><span class="sourceText">var </span><span class="posText">centro:Punto</span><span class="sourceText">;</span>
-<span class="dots">·  ·  |  </span>"<span class="value">centro</span>"  
+<span class="dots">·  ·  </span>DefVariable &rarr;                                         <span class="pos">11:5  11:5   </span><span class="sourceText">var </span><span class="posText">b</span><span class="sourceText">:char;</span>
+<span class="dots">·  ·  |  </span>"<span class="value">b</span>"  
 <span class="dots">·  ·  |  </span><span class="null">null</span>  tipo:<span class="type">Type</span>
-<span class="dots">·  ·  </span>DefFuncion &rarr;                                          <span class="pos">28:1  30:18  </span><span class="sourceText"></span><span class="posText">main() {</span><span class="sourceText"> ... </span><span class="posText">print centro.y</span><span class="sourceText">; // No error en esta fase aunque aunque el campo no está en la struct </span>
+<span class="dots">·  ·  </span>DefVariable &rarr;                                         <span class="pos">13:5  13:5   </span><span class="sourceText">var </span><span class="posText">d</span><span class="sourceText">:float;</span>
+<span class="dots">·  ·  |  </span>"<span class="value">d</span>"  
+<span class="dots">·  ·  |  </span><span class="null">null</span>  tipo:<span class="type">Type</span>
+<span class="dots">·  ·  </span>DefVariable &rarr;                                         <span class="pos">15:5  15:5   </span><span class="sourceText">var </span><span class="posText">e</span><span class="sourceText">:float;</span>
+<span class="dots">·  ·  |  </span>"<span class="value">e</span>"  
+<span class="dots">·  ·  |  </span><span class="null">null</span>  tipo:<span class="type">Type</span>
+<span class="dots">·  ·  </span>DefVariable &rarr;                                         <span class="pos">17:5  17:9   </span><span class="sourceText">var </span><span class="posText">a:[20</span><span class="sourceText">] int;    // Variable global repetida </span>
+<span class="dots">·  ·  |  </span>"<span class="value">a</span>"  
+<span class="dots">·  ·  |  </span><span class="null">null</span>  tipo:<span class="type">Type</span>
+<span class="dots">·  ·  </span>DefFuncion &rarr;                                          <span class="pos">20:1  31:16  </span><span class="sourceText"></span><span class="posText">dobleSuma(z:int, b:int, z:float): int { // Parámetro 'z' repetido ('b' no colisiona con global) da fallo la b</span><span class="sourceText"> ... </span><span class="posText">print local2</span><span class="sourceText">;    </span>
+<span class="dots">·  ·  |  </span>"<span class="value">dobleSuma</span>"  
+<span class="dots">·  ·  |  </span><span class="null">null</span>  tipo:<span class="type">Type</span>
+<span class="dots">·  ·  |  </span>defParametros  <span class="type">List&lt;Definition&gt;</span> = 
+<span class="dots">·  ·  |  ·  </span>DefVariable &rarr;                                   <span class="pos">20:11  20:11 </span><span class="sourceText">dobleSuma(</span><span class="posText">z</span><span class="sourceText">:int, b:int, z:float): int { // Parámetro 'z' repetido ('b' no colisiona con global) da fallo la b</span>
+<span class="dots">·  ·  |  ·  |  </span>"<span class="value">z</span>"  
+<span class="dots">·  ·  |  ·  |  </span><span class="null">null</span>  tipo:<span class="type">Type</span>
+<span class="dots">·  ·  |  ·  </span>DefVariable &rarr;                                   <span class="pos">20:18  20:18 </span><span class="sourceText">dobleSuma(z:int, </span><span class="posText">b</span><span class="sourceText">:int, z:float): int { // Parámetro 'z' repetido ('b' no colisiona con global) da fallo la b</span>
+<span class="dots">·  ·  |  ·  |  </span>"<span class="value">b</span>"  
+<span class="dots">·  ·  |  ·  |  </span><span class="null">null</span>  tipo:<span class="type">Type</span>
+<span class="dots">·  ·  |  ·  </span>DefVariable &rarr;                                   <span class="pos">20:25  20:25 </span><span class="sourceText">dobleSuma(z:int, b:int, </span><span class="posText">z</span><span class="sourceText">:float): int { // Parámetro 'z' repetido ('b' no colisiona con global) da fallo la b</span>
+<span class="dots">·  ·  |  ·  |  </span>"<span class="value">z</span>"  
+<span class="dots">·  ·  |  ·  |  </span><span class="null">null</span>  tipo:<span class="type">Type</span>
+<span class="dots">·  ·  |  </span>defVarLocal  <span class="type">List&lt;Definition&gt;</span> = 
+<span class="dots">·  ·  |  ·  </span>DefVariable &rarr;                                   <span class="pos">21:9  21:14  </span><span class="sourceText">var </span><span class="posText">local1</span><span class="sourceText">:int;</span>
+<span class="dots">·  ·  |  ·  |  </span>"<span class="value">local1</span>"  
+<span class="dots">·  ·  |  ·  |  </span><span class="null">null</span>  tipo:<span class="type">Type</span>
+<span class="dots">·  ·  |  ·  </span>DefVariable &rarr;                                   <span class="pos">22:9  22:14  </span><span class="sourceText">var </span><span class="posText">local2</span><span class="sourceText">:int;        </span>
+<span class="dots">·  ·  |  ·  |  </span>"<span class="value">local2</span>"  
+<span class="dots">·  ·  |  ·  |  </span><span class="null">null</span>  tipo:<span class="type">Type</span>
+<span class="dots">·  ·  |  ·  </span>DefVariable &rarr;                                   <span class="pos">23:9  23:14  </span><span class="sourceText">var </span><span class="posText">local1</span><span class="sourceText">:int;        // Local repetida (con otra local) </span>
+<span class="dots">·  ·  |  ·  |  </span>"<span class="value">local1</span>"  
+<span class="dots">·  ·  |  ·  |  </span><span class="null">null</span>  tipo:<span class="type">Type</span>
+<span class="dots">·  ·  |  ·  </span>DefVariable &rarr;                                   <span class="pos">24:9  24:9   </span><span class="sourceText">var </span><span class="posText">b</span><span class="sourceText">:float;        // Local repetida (con un parámetro) </span>
+<span class="dots">·  ·  |  ·  |  </span>"<span class="value">b</span>"  
+<span class="dots">·  ·  |  ·  |  </span><span class="null">null</span>  tipo:<span class="type">Type</span>
+<span class="dots">·  ·  |  ·  </span>DefVariable &rarr;                                   <span class="pos">25:9  25:9   </span><span class="sourceText">var </span><span class="posText">d</span><span class="sourceText">:int;        // Esta no debía dar error, ya que la otra 'd' es global da fallo d</span>
+<span class="dots">·  ·  |  ·  |  </span>"<span class="value">d</span>"  
+<span class="dots">·  ·  |  ·  |  </span><span class="null">null</span>  tipo:<span class="type">Type</span>
+<span class="dots">·  ·  |  </span>sentencias  <span class="type">List&lt;Statement&gt;</span> = 
+<span class="dots">·  ·  |  ·  </span>Print &rarr;                                         <span class="pos">27:11  27:11 </span><span class="sourceText">print </span><span class="posText">a</span><span class="sourceText">;    </span>
+<span class="dots">·  ·  |  ·  |  </span>"a"  <span class="type">Variable.ident</span>                          <span class="pos">27:11  27:11 </span><span class="sourceText">print </span><span class="posText">a</span><span class="sourceText">;    </span>
+<span class="dots">·  ·  |  ·  </span>Print &rarr;                                         <span class="pos">28:11  28:11 </span><span class="sourceText">print </span><span class="posText">d</span><span class="sourceText">;</span>
+<span class="dots">·  ·  |  ·  |  </span>"d"  <span class="type">Variable.ident</span>                          <span class="pos">28:11  28:11 </span><span class="sourceText">print </span><span class="posText">d</span><span class="sourceText">;</span>
+<span class="dots">·  ·  |  ·  </span>Print &rarr;                                         <span class="pos">29:11  29:11 </span><span class="sourceText">print </span><span class="posText">b</span><span class="sourceText">;    </span>
+<span class="dots">·  ·  |  ·  |  </span>"b"  <span class="type">Variable.ident</span>                          <span class="pos">29:11  29:11 </span><span class="sourceText">print </span><span class="posText">b</span><span class="sourceText">;    </span>
+<span class="dots">·  ·  |  ·  </span>Print &rarr;                                         <span class="pos">30:11  30:11 </span><span class="sourceText">print </span><span class="posText">c</span><span class="sourceText">;        // variable no definida </span>
+<span class="dots">·  ·  |  ·  |  </span>"c"  <span class="type">Variable.ident</span>                          <span class="pos">30:11  30:11 </span><span class="sourceText">print </span><span class="posText">c</span><span class="sourceText">;        // variable no definida </span>
+<span class="dots">·  ·  |  ·  </span>Print &rarr;                                         <span class="pos">31:11  31:16 </span><span class="sourceText">print </span><span class="posText">local2</span><span class="sourceText">;    </span>
+<span class="dots">·  ·  |  ·  |  </span>"local2"  <span class="type">Variable.ident</span>                     <span class="pos">31:11  31:16 </span><span class="sourceText">print </span><span class="posText">local2</span><span class="sourceText">;    </span>
+<span class="dots">·  ·  </span>DefFuncion &rarr;                                          <span class="pos">34:1  36:16  </span><span class="sourceText"></span><span class="posText">prueba() {</span><span class="sourceText"> ... </span><span class="posText">print local2</span><span class="sourceText">;    // Error: es local de la función anterior</span>
+<span class="dots">·  ·  |  </span>"<span class="value">prueba</span>"  
+<span class="dots">·  ·  |  </span><span class="null">null</span>  tipo:<span class="type">Type</span>
+<span class="dots">·  ·  |  </span>defParametros  <span class="type">List&lt;Definition&gt;</span> = 
+<span class="dots">·  ·  |  </span>defVarLocal  <span class="type">List&lt;Definition&gt;</span> = 
+<span class="dots">·  ·  |  </span>sentencias  <span class="type">List&lt;Statement&gt;</span> = 
+<span class="dots">·  ·  |  ·  </span>Print &rarr;                                         <span class="pos">35:11  35:11 </span><span class="sourceText">print </span><span class="posText">z</span><span class="sourceText">;    // Error: es parámetro de la función anterior</span>
+<span class="dots">·  ·  |  ·  |  </span>"z"  <span class="type">Variable.ident</span>                          <span class="pos">35:11  35:11 </span><span class="sourceText">print </span><span class="posText">z</span><span class="sourceText">;    // Error: es parámetro de la función anterior</span>
+<span class="dots">·  ·  |  ·  </span>Print &rarr;                                         <span class="pos">36:11  36:16 </span><span class="sourceText">print </span><span class="posText">local2</span><span class="sourceText">;    // Error: es local de la función anterior</span>
+<span class="dots">·  ·  |  ·  |  </span>"local2"  <span class="type">Variable.ident</span>                     <span class="pos">36:11  36:16 </span><span class="sourceText">print </span><span class="posText">local2</span><span class="sourceText">;    // Error: es local de la función anterior</span>
+<span class="dots">·  ·  </span>DefFuncion &rarr;                                          <span class="pos">40:1  41:17  </span><span class="sourceText"></span><span class="posText">main() {</span><span class="sourceText"> ... </span><span class="posText">dobleSuma(5.6</span><span class="sourceText">);    // No es error en esta fase aunque no coincidan parámetros </span>
 <span class="dots">·  ·  |  </span>"<span class="value">main</span>"  
 <span class="dots">·  ·  |  </span><span class="null">null</span>  tipo:<span class="type">Type</span>
 <span class="dots">·  ·  |  </span>defParametros  <span class="type">List&lt;Definition&gt;</span> = 
 <span class="dots">·  ·  |  </span>defVarLocal  <span class="type">List&lt;Definition&gt;</span> = 
 <span class="dots">·  ·  |  </span>sentencias  <span class="type">List&lt;Statement&gt;</span> = 
-<span class="dots">·  ·  |  ·  </span>Print &rarr;                                         <span class="pos">29:11  29:18 </span><span class="sourceText">print </span><span class="posText">centro.x</span><span class="sourceText">;</span>
-<span class="dots">·  ·  |  ·  |  </span>AccesoStruct &rarr;                               <span class="pos">29:11  29:18 </span><span class="sourceText">print </span><span class="posText">centro.x</span><span class="sourceText">;</span>
-<span class="dots">·  ·  |  ·  |  ·  </span>"centro"  <span class="type">Variable.ident</span>                  <span class="pos">29:11  29:16 </span><span class="sourceText">print </span><span class="posText">centro</span><span class="sourceText">.x;</span>
-<span class="dots">·  ·  |  ·  |  ·  </span>"<span class="value">x</span>"  
-<span class="dots">·  ·  |  ·  </span>Print &rarr;                                         <span class="pos">30:11  30:18 </span><span class="sourceText">print </span><span class="posText">centro.y</span><span class="sourceText">; // No error en esta fase aunque aunque el campo no está en la struct </span>
-<span class="dots">·  ·  |  ·  |  </span>AccesoStruct &rarr;                               <span class="pos">30:11  30:18 </span><span class="sourceText">print </span><span class="posText">centro.y</span><span class="sourceText">; // No error en esta fase aunque aunque el campo no está en la struct </span>
-<span class="dots">·  ·  |  ·  |  ·  </span>"centro"  <span class="type">Variable.ident</span>                  <span class="pos">30:11  30:16 </span><span class="sourceText">print </span><span class="posText">centro</span><span class="sourceText">.y; // No error en esta fase aunque aunque el campo no está en la struct </span>
-<span class="dots">·  ·  |  ·  |  ·  </span>"<span class="value">y</span>"  
+<span class="dots">·  ·  |  ·  </span>Invocacion &rarr;                                    <span class="pos">41:5  41:17  </span><span class="sourceText"></span><span class="posText">dobleSuma(5.6</span><span class="sourceText">);    // No es error en esta fase aunque no coincidan parámetros </span>
+<span class="dots">·  ·  |  ·  |  </span>"<span class="value">dobleSuma</span>"  
+<span class="dots">·  ·  |  ·  |  </span>argumentos  <span class="type">List&lt;Expression&gt;</span> = 
+<span class="dots">·  ·  |  ·  |  ·  </span>LitReal &rarr;                                 <span class="pos">41:15  41:17 </span><span class="sourceText">dobleSuma(</span><span class="posText">5.6</span><span class="sourceText">);    // No es error en esta fase aunque no coincidan parámetros </span>
+<span class="dots">·  ·  |  ·  |  ·  |  </span><span class="value">5.6</span>  <span class="type">float</span>
 
 [ASTPrinter] --------------------------------
 </pre>
