@@ -235,6 +235,18 @@ public class DefaultVisitor implements Visitor {
 			node.getTipo().accept(this, param);
 		return null;
 	}
+
+	//	class FuncionTipo { Type tipoRetorno; }
+	public Object visit(FuncionTipo node, Object param) {
+		if (node.getTipoRetorno() != null)
+			node.getTipoRetorno().accept(this, param);
+		return null;
+	}
+
+	//	class VoidTipo {  }
+	public Object visit(VoidTipo node, Object param) {
+		return null;
+	}
 	
 	// Método auxiliar -----------------------------
 	protected void visitChildren(List<? extends AST> children, Object param) {

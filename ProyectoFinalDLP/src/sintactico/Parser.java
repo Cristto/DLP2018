@@ -811,11 +811,11 @@ case 10:
 break;
 case 11:
 //#line 49 "sintac.y"
-{yyval = val_peek(0);}
+{yyval = new FuncionTipo(val_peek(0));}
 break;
 case 12:
 //#line 50 "sintac.y"
-{yyval = null;}
+{yyval = new VoidTipo();}
 break;
 case 13:
 //#line 52 "sintac.y"

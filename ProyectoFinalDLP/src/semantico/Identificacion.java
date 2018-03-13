@@ -1,12 +1,17 @@
 package semantico;
 
 import ast.ArrayTipo;
+import ast.DefCampo;
 import ast.DefFuncion;
+import ast.DefStruct;
 import ast.DefVariable;
+import ast.IdentTipo;
 import ast.Invocacion;
 import ast.LlamadaFuncion;
 import ast.Position;
+import ast.Return;
 import ast.Variable;
+import ast.VoidTipo;
 import main.GestorErrores;
 import semantico.context.ContextMap;
 import visitor.DefaultVisitor;
@@ -17,6 +22,8 @@ public class Identificacion extends DefaultVisitor {
 	private GestorErrores gestorErrores;
 	private ContextMap<String, DefFuncion> funciones = new ContextMap<String,DefFuncion>();
 	private ContextMap<String, DefVariable> variables = new ContextMap<String,DefVariable>();
+	private ContextMap<String, DefStruct> structs = new ContextMap<String,DefStruct>();
+	private ContextMap<String, DefCampo> campos = new ContextMap<String,DefCampo>();
 
 	public Identificacion(GestorErrores gestor) {
 		this.gestorErrores = gestor;
@@ -91,10 +98,55 @@ public class Identificacion extends DefaultVisitor {
 		return null;
 	}
 	
+	public Object visit(DefStruct node, Object param) {
+		
+		predicado(structs.getFromAny(node.getIdent()) == null,"estructura repetida",node.getStart());
+		structs.put(node.getIdent(), node);
+
+		IdentTipo tipo = new IdentTipo(node.getIdent());
+		tipo.setDefstruct(node);
+		node.setTipo(tipo);
+
+		structs.set();
+		super.visit(node, param);
+		structs.reset();
+		return null;
+		
+	}
+	
+	
+	public Object visit(DefCampo node, Object param){
+		
+		predicado(campos.getFromTop(node.getIdent()) == null,"campo repetido",node.getStart());
+		 campos.put(node.getIdent(), node);
+
+		campos.set();
+		super.visit(node, param);
+		campos.reset();
+		return null;
+	}
+	
 	public Object visit(ArrayTipo node, Object param) {
 		node.getTipo().accept(this, param);
 		return null;
 	}
+	
+	public Object visit(IdentTipo node, Object param) {
+		
+		predicado(structs.getFromAny(node.getValor()) != null,"no definido",node.getStart());
+		node.setDefstruct(structs.getFromAny(node.getValor()));
+
+		return null;
+	}
+	
+	public Object visit(Return node, Object param) {
+		if (node.getExpresion() != null)
+		    node.getExpresion().accept(this, param);
+		else
+		    node.setTipo(new VoidTipo());
+		return null;
+	    }
+	
 	
 	
 	/**

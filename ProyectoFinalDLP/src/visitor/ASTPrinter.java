@@ -436,6 +436,25 @@ public class ASTPrinter extends DefaultVisitor {
 		return null;
 	}
 
+	//	class FuncionTipo { Type tipoRetorno; }
+	public Object visit(FuncionTipo node, Object param) {
+		int indent = ((Integer)param).intValue();
+
+		printName(indent, "FuncionTipo", node, false);
+
+		visit(indent + 1, "tipoRetorno", "Type",node.getTipoRetorno());
+		return null;
+	}
+
+	//	class VoidTipo {  }
+	public Object visit(VoidTipo node, Object param) {
+		int indent = ((Integer)param).intValue();
+
+		printName(indent, "VoidTipo", node, true);
+
+		return null;
+	}
+
 	// -----------------------------------------------------------------
 	// Métodos invocados desde los métodos visit -----------------------
 
