@@ -6,9 +6,9 @@ package ast;
 
 public interface Definition extends AST {
 	
-	void setTipo(Type tipo);
+	//void setTipo(Type tipo);
 	
-	Type getTipo();
+	//Type getTipo();
 
     
 

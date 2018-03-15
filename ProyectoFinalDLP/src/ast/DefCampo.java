@@ -11,7 +11,7 @@ import visitor.*;
 public class DefCampo extends AbstractDefinition {
 
 	public DefCampo(String ident, Type tipo) {
-		super(tipo);
+		this.tipo = tipo;
 		this.ident = ident;
 		
 
@@ -19,7 +19,7 @@ public class DefCampo extends AbstractDefinition {
 	}
 
 	public DefCampo(Object ident, Object tipo) {
-		super((Type)tipo);
+		this.tipo = (Type)tipo;
 		this.ident = (ident instanceof Token) ? ((Token)ident).getLexeme() : (String) ident;
 		
 

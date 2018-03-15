@@ -13,7 +13,7 @@ import visitor.Visitor;
 public class DefStruct extends AbstractDefinition {
 
 	public DefStruct(String ident, List<Definition> campos) {
-		super(new IdentTipo(ident));
+		this.ident = ident;
 		
 		this.campos = campos;
 
@@ -22,7 +22,7 @@ public class DefStruct extends AbstractDefinition {
 
 	@SuppressWarnings("unchecked")
 	public DefStruct(Object ident, Object campos) {
-		super(new IdentTipo( (ident instanceof Token) ? ((Token)ident).getLexeme() : (String) ident));
+		this.ident =  (ident instanceof Token) ? ((Token)ident).getLexeme() : (String) ident;
 		this.campos = (List<Definition>) campos;
 
 		searchForPositions(ident, campos);	// Obtener linea/columna a partir de los hijos

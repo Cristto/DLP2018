@@ -133,11 +133,10 @@ public class Identificacion extends DefaultVisitor {
 		tipo.setDefstruct(node);
 		node.setTipo(tipo);*/
 
-		structs.set();
-		//variables.set();
+		
+		variables.set();
 		super.visit(node, param);
-		//variables.reset();
-		structs.reset();
+		variables.reset();
 		return null;
 		
 	}
@@ -153,9 +152,9 @@ public class Identificacion extends DefaultVisitor {
 		else
 			gestorErrores.error("Identificacion","el campo "+ node.getIdent()+" ya esta repetido", node.getStart());
 			
-		campos.set();
+		//campos.set();
 		super.visit(node, param);
-		campos.reset();
+		//campos.reset();
 		return null;
 	}
 	
