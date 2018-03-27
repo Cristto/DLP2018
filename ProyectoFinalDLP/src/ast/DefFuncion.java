@@ -12,8 +12,8 @@ import visitor.*;
 public class DefFuncion extends AbstractDefinition {
 
 	public DefFuncion(String ident, Type tipo, List<Definition> defParametros, List<Definition> defVarLocal, List<Statement> sentencias) {
-		this.ident = ident;
 		this.tipo = tipo;
+		this.ident = ident;
 		this.defParametros = defParametros;
 		this.defVarLocal = defVarLocal;
 		this.sentencias = sentencias;
@@ -23,8 +23,8 @@ public class DefFuncion extends AbstractDefinition {
 
 	@SuppressWarnings("unchecked")
 	public DefFuncion(Object ident, Object tipo, Object defParametros, Object defVarLocal, Object sentencias) {
-		this.ident = (ident instanceof Token) ? ((Token)ident).getLexeme() : (String) ident;
 		this.tipo = (Type) tipo;
+		this.ident = (ident instanceof Token) ? ((Token)ident).getLexeme() : (String) ident;
 		this.defParametros = (List<Definition>) defParametros;
 		this.defVarLocal = (List<Definition>) defVarLocal;
 		this.sentencias = (List<Statement>) sentencias;

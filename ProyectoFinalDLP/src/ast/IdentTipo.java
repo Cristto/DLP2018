@@ -4,7 +4,7 @@
 
 package ast;
 
-import visitor.*;
+import visitor.Visitor;
 
 //	IdentTipo:type -> valor:String
 
@@ -26,6 +26,14 @@ public class IdentTipo extends AbstractType {
 	public void setValor(String valor) {
 		this.valor = valor;
 	}
+	
+	public DefStruct getDefstruct() {
+		return defstruct;
+	}
+	
+	public void setDefstruct(DefStruct defstruct) {
+		this.defstruct = defstruct;
+	}
 
 	@Override
 	public Object accept(Visitor v, Object param) { 
@@ -33,5 +41,6 @@ public class IdentTipo extends AbstractType {
 	}
 
 	private String valor;
+	private DefStruct defstruct;
 }
 

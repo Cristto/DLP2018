@@ -11,15 +11,17 @@ import visitor.*;
 public class DefVariable extends AbstractDefinition {
 
 	public DefVariable(String ident, Type tipo) {
+	
 		this.ident = ident;
 		this.tipo = tipo;
 
-		searchForPositions(tipo);	// Obtener linea/columna a partir de los hijos
+		searchForPositions();	// Obtener linea/columna a partir de los hijos
 	}
 
 	public DefVariable(Object ident, Object tipo) {
+		
 		this.ident = (ident instanceof Token) ? ((Token)ident).getLexeme() : (String) ident;
-		this.tipo = (Type) tipo;
+		this.tipo=(Type)tipo;
 
 		searchForPositions(ident, tipo);	// Obtener linea/columna a partir de los hijos
 	}
@@ -37,6 +39,13 @@ public class DefVariable extends AbstractDefinition {
 	public void setTipo(Type tipo) {
 		this.tipo = tipo;
 	}
+	
+	public int getAmbito() {
+		return ambito;
+	}
+	public void setAmbito(int ambito) {
+		this.ambito = ambito;
+	}
 
 	@Override
 	public Object accept(Visitor v, Object param) { 
@@ -45,5 +54,6 @@ public class DefVariable extends AbstractDefinition {
 
 	private String ident;
 	private Type tipo;
+	private int ambito;
 }
 

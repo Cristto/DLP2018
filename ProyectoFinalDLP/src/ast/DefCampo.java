@@ -11,15 +11,17 @@ import visitor.*;
 public class DefCampo extends AbstractDefinition {
 
 	public DefCampo(String ident, Type tipo) {
-		this.ident = ident;
 		this.tipo = tipo;
+		this.ident = ident;
+		
 
 		searchForPositions(tipo);	// Obtener linea/columna a partir de los hijos
 	}
 
 	public DefCampo(Object ident, Object tipo) {
+		this.tipo = (Type)tipo;
 		this.ident = (ident instanceof Token) ? ((Token)ident).getLexeme() : (String) ident;
-		this.tipo = (Type) tipo;
+		
 
 		searchForPositions(ident, tipo);	// Obtener linea/columna a partir de los hijos
 	}

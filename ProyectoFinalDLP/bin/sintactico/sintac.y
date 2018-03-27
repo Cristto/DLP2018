@@ -8,6 +8,7 @@ import java.io.*;
 import java.util.*;
 import ast.*;
 import main.*;
+
 %}
 
 /* Precedencias aquí --------------------------------------- */
@@ -46,8 +47,8 @@ defVariable: 'VAR' 'IDENT' ':' tipo ';' {$$ = new DefVariable($2,$4);}
 defFuncion: 'IDENT' '(' parametrosOpt ')' retornoOpt '{' defVariablesOpt sentenciasOpt '}' {$$ = new DefFuncion($1,$5,$3,$7,$8);}
 	;
 
-retornoOpt: ':' tipo {$$ = $2;}
-	|				 {$$ = null;}
+retornoOpt: ':' tipo {$$ = new FuncionTipo($2);}
+	|				 {$$ = new VoidTipo();}
 	;
 parametrosOpt: defParametros 	{$$ = $1;}
 	|							{$$ = new ArrayList<Definition>();}				

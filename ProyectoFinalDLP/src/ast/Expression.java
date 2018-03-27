@@ -6,5 +6,9 @@ package ast;
 
 public interface Expression extends AST {
 
+	boolean isLvalue();
+
+	void setLvalue(boolean lvalue);
+
 }
 

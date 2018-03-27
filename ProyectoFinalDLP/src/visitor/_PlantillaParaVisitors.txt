@@ -386,4 +386,20 @@ public class <nombre clase> extends DefaultVisitor {
 
 		return null;
 	}
+
+	//	class FuncionTipo { Type tipoRetorno; }
+	public Object visit(FuncionTipo node, Object param) {
+
+		// super.visit(node, param);
+
+		if (node.getTipoRetorno() != null)
+			node.getTipoRetorno().accept(this, param);
+
+		return null;
+	}
+
+	//	class VoidTipo {  }
+	public Object visit(VoidTipo node, Object param) {
+		return null;
+	}
 }

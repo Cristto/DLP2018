@@ -39,4 +39,6 @@ public interface Visitor {
 	public Object visit(CharTipo node, Object param);
 	public Object visit(IdentTipo node, Object param);
 	public Object visit(ArrayTipo node, Object param);
+	public Object visit(FuncionTipo node, Object param);
+	public Object visit(VoidTipo node, Object param);
 }
