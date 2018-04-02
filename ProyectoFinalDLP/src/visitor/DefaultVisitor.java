@@ -144,14 +144,14 @@ public class DefaultVisitor implements Visitor {
 		return null;
 	}
 
-	//	class MenosUnario { String operador;  Expression expresion; }
+	//	class MenosUnario { Expression expresion; }
 	public Object visit(MenosUnario node, Object param) {
 		if (node.getExpresion() != null)
 			node.getExpresion().accept(this, param);
 		return null;
 	}
 
-	//	class Not { String operador;  Expression expresion; }
+	//	class Not { Expression expresion; }
 	public Object visit(Not node, Object param) {
 		if (node.getExpresion() != null)
 			node.getExpresion().accept(this, param);

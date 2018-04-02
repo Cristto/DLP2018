@@ -23,7 +23,8 @@ import java.io.*;
 import java.util.*;
 import ast.*;
 import main.*;
-//#line 24 "Parser.java"
+
+//#line 25 "Parser.java"
 
 
 
@@ -584,7 +585,7 @@ final static String yyrule[] = {
 "expresion : \"CAST\" '<' tipo '>' '(' expresion ')'",
 };
 
-//#line 128 "sintac.y"
+//#line 129 "sintac.y"
 /* No es necesario modificar esta sección ------------------ */
 
 public Parser(Yylex lex, GestorErrores gestor, boolean debug) {
@@ -616,7 +617,7 @@ int yylex() {
 private Yylex lex;
 private GestorErrores gestor;
 private AST raiz;
-//#line 561 "Parser.java"
+//#line 562 "Parser.java"
 //###############################################################
 // method: yylexdebug : check lexer state
 //###############################################################
@@ -770,270 +771,270 @@ boolean doaction;
       {
 //########## USER-SUPPLIED ACTIONS ##########
 case 1:
-//#line 29 "sintac.y"
+//#line 30 "sintac.y"
 {raiz = new Program(val_peek(0));}
 break;
 case 2:
-//#line 32 "sintac.y"
+//#line 33 "sintac.y"
 {yyval = val_peek(1); ((List)val_peek(1)).add(val_peek(0));}
 break;
 case 3:
-//#line 33 "sintac.y"
+//#line 34 "sintac.y"
 {yyval = new ArrayList<Definition>();}
 break;
 case 4:
-//#line 35 "sintac.y"
-{yyval = val_peek(0);}
-break;
-case 5:
 //#line 36 "sintac.y"
 {yyval = val_peek(0);}
 break;
-case 6:
+case 5:
 //#line 37 "sintac.y"
 {yyval = val_peek(0);}
 break;
+case 6:
+//#line 38 "sintac.y"
+{yyval = val_peek(0);}
+break;
 case 7:
-//#line 40 "sintac.y"
+//#line 41 "sintac.y"
 {yyval = val_peek(1); ((List)val_peek(1)).add(val_peek(0));}
 break;
 case 8:
-//#line 41 "sintac.y"
+//#line 42 "sintac.y"
 {yyval = new ArrayList<Definition>();}
 break;
 case 9:
-//#line 44 "sintac.y"
+//#line 45 "sintac.y"
 {yyval = new DefVariable(val_peek(3),val_peek(1));}
 break;
 case 10:
-//#line 46 "sintac.y"
+//#line 47 "sintac.y"
 {yyval = new DefFuncion(val_peek(8),val_peek(4),val_peek(6),val_peek(2),val_peek(1));}
 break;
 case 11:
-//#line 49 "sintac.y"
+//#line 50 "sintac.y"
 {yyval = new FuncionTipo(val_peek(0));}
 break;
 case 12:
-//#line 50 "sintac.y"
+//#line 51 "sintac.y"
 {yyval = new VoidTipo();}
 break;
 case 13:
-//#line 52 "sintac.y"
+//#line 53 "sintac.y"
 {yyval = val_peek(0);}
 break;
 case 14:
-//#line 53 "sintac.y"
+//#line 54 "sintac.y"
 {yyval = new ArrayList<Definition>();}
 break;
 case 15:
-//#line 55 "sintac.y"
+//#line 56 "sintac.y"
 {yyval=val_peek(2);  ((List)yyval).add(val_peek(0)); }
 break;
 case 16:
-//#line 56 "sintac.y"
+//#line 57 "sintac.y"
 {yyval= new ArrayList<Definition>(); ((List)yyval).add(val_peek(0)); }
 break;
 case 17:
-//#line 58 "sintac.y"
+//#line 59 "sintac.y"
 {yyval = new DefVariable(val_peek(2),val_peek(0));}
 break;
 case 18:
-//#line 61 "sintac.y"
+//#line 62 "sintac.y"
 {yyval = new DefStruct(val_peek(4),val_peek(2));}
 break;
 case 19:
-//#line 64 "sintac.y"
+//#line 65 "sintac.y"
 { yyval = val_peek(1); ((List)val_peek(1)).add(val_peek(0));}
 break;
 case 20:
-//#line 65 "sintac.y"
+//#line 66 "sintac.y"
 {yyval = new ArrayList<Definition>();}
 break;
 case 21:
-//#line 67 "sintac.y"
+//#line 68 "sintac.y"
 {yyval = new DefCampo(val_peek(3),val_peek(1));}
 break;
 case 22:
-//#line 70 "sintac.y"
+//#line 71 "sintac.y"
 {yyval = new IntTipo();}
 break;
 case 23:
-//#line 71 "sintac.y"
+//#line 72 "sintac.y"
 {yyval = new RealTipo();}
 break;
 case 24:
-//#line 72 "sintac.y"
+//#line 73 "sintac.y"
 {yyval = new CharTipo();}
 break;
 case 25:
-//#line 73 "sintac.y"
+//#line 74 "sintac.y"
 {yyval = new IdentTipo(val_peek(0));}
 break;
 case 26:
-//#line 74 "sintac.y"
+//#line 75 "sintac.y"
 {yyval = new ArrayTipo(val_peek(2),val_peek(0));}
 break;
 case 27:
-//#line 77 "sintac.y"
+//#line 78 "sintac.y"
 {yyval = val_peek(1); ((List)val_peek(1)).add(val_peek(0));}
 break;
 case 28:
-//#line 78 "sintac.y"
+//#line 79 "sintac.y"
 {yyval = new ArrayList<Statement>();}
 break;
 case 29:
-//#line 81 "sintac.y"
+//#line 82 "sintac.y"
 {yyval = new Print(val_peek(1));}
 break;
 case 30:
-//#line 82 "sintac.y"
+//#line 83 "sintac.y"
 {yyval = new Printsp(val_peek(1));}
 break;
 case 31:
-//#line 83 "sintac.y"
+//#line 84 "sintac.y"
 {yyval = new Println(val_peek(1));}
 break;
 case 32:
-//#line 84 "sintac.y"
+//#line 85 "sintac.y"
 {yyval = new Read(val_peek(1));}
 break;
 case 33:
-//#line 85 "sintac.y"
+//#line 86 "sintac.y"
 {yyval = new Asignacion(val_peek(3),val_peek(1));}
 break;
 case 34:
-//#line 86 "sintac.y"
+//#line 87 "sintac.y"
 {yyval = new IfElse(val_peek(4),val_peek(1));}
 break;
 case 35:
-//#line 87 "sintac.y"
+//#line 88 "sintac.y"
 {yyval = new IfElse(val_peek(8),val_peek(5),val_peek(1));}
 break;
 case 36:
-//#line 88 "sintac.y"
+//#line 89 "sintac.y"
 {yyval = new While(val_peek(4),val_peek(1));}
 break;
 case 37:
-//#line 89 "sintac.y"
+//#line 90 "sintac.y"
 {yyval = new Return(val_peek(1));}
 break;
 case 38:
-//#line 90 "sintac.y"
+//#line 91 "sintac.y"
 {yyval = new Return();}
 break;
 case 39:
-//#line 91 "sintac.y"
+//#line 92 "sintac.y"
 {yyval = new Invocacion(val_peek(4),val_peek(2));}
 break;
 case 40:
-//#line 94 "sintac.y"
+//#line 95 "sintac.y"
 {yyval = val_peek(0);}
 break;
 case 41:
-//#line 95 "sintac.y"
+//#line 96 "sintac.y"
 {yyval = new ArrayList<Expression>();}
 break;
 case 42:
-//#line 98 "sintac.y"
+//#line 99 "sintac.y"
 {yyval=val_peek(2);  ((List)yyval).add(val_peek(0)); }
 break;
 case 43:
-//#line 99 "sintac.y"
+//#line 100 "sintac.y"
 {yyval= new ArrayList<Expression>(); ((List)yyval).add(val_peek(0)); }
 break;
 case 44:
-//#line 102 "sintac.y"
+//#line 103 "sintac.y"
 {yyval = new LitInt(val_peek(0));}
 break;
 case 45:
-//#line 103 "sintac.y"
+//#line 104 "sintac.y"
 {yyval = new LitReal(val_peek(0));}
 break;
 case 46:
-//#line 104 "sintac.y"
+//#line 105 "sintac.y"
 {yyval = new Variable(val_peek(0));}
 break;
 case 47:
-//#line 105 "sintac.y"
+//#line 106 "sintac.y"
 {yyval = new LitChar(val_peek(0));}
 break;
 case 48:
-//#line 106 "sintac.y"
-{yyval = new ExpresionAritmetica(val_peek(2),val_peek(1),val_peek(0));}
-break;
-case 49:
 //#line 107 "sintac.y"
 {yyval = new ExpresionAritmetica(val_peek(2),val_peek(1),val_peek(0));}
 break;
-case 50:
+case 49:
 //#line 108 "sintac.y"
-{yyval = new Comparacion(val_peek(2),val_peek(1),val_peek(0));}
+{yyval = new ExpresionAritmetica(val_peek(2),val_peek(1),val_peek(0));}
 break;
-case 51:
+case 50:
 //#line 109 "sintac.y"
 {yyval = new Comparacion(val_peek(2),val_peek(1),val_peek(0));}
 break;
-case 52:
+case 51:
 //#line 110 "sintac.y"
-{yyval = new ExpresionAritmetica(val_peek(2),val_peek(1),val_peek(0));}
+{yyval = new Comparacion(val_peek(2),val_peek(1),val_peek(0));}
 break;
-case 53:
+case 52:
 //#line 111 "sintac.y"
 {yyval = new ExpresionAritmetica(val_peek(2),val_peek(1),val_peek(0));}
 break;
-case 54:
+case 53:
 //#line 112 "sintac.y"
+{yyval = new ExpresionAritmetica(val_peek(2),val_peek(1),val_peek(0));}
+break;
+case 54:
+//#line 113 "sintac.y"
 {yyval = new AccesoStruct(val_peek(2),val_peek(0));}
 break;
 case 55:
-//#line 113 "sintac.y"
-{yyval = new Comparacion(val_peek(2),val_peek(1),val_peek(0));}
-break;
-case 56:
 //#line 114 "sintac.y"
 {yyval = new Comparacion(val_peek(2),val_peek(1),val_peek(0));}
 break;
-case 57:
+case 56:
 //#line 115 "sintac.y"
-{yyval = new ExpresionLogica(val_peek(2),val_peek(1),val_peek(0));}
+{yyval = new Comparacion(val_peek(2),val_peek(1),val_peek(0));}
 break;
-case 58:
+case 57:
 //#line 116 "sintac.y"
 {yyval = new ExpresionLogica(val_peek(2),val_peek(1),val_peek(0));}
 break;
-case 59:
+case 58:
 //#line 117 "sintac.y"
-{yyval = new Comparacion(val_peek(2),val_peek(1),val_peek(0));}
+{yyval = new ExpresionLogica(val_peek(2),val_peek(1),val_peek(0));}
 break;
-case 60:
+case 59:
 //#line 118 "sintac.y"
 {yyval = new Comparacion(val_peek(2),val_peek(1),val_peek(0));}
 break;
-case 61:
+case 60:
 //#line 119 "sintac.y"
-{yyval = new MenosUnario(val_peek(1),val_peek(0));}
+{yyval = new Comparacion(val_peek(2),val_peek(1),val_peek(0));}
+break;
+case 61:
+//#line 120 "sintac.y"
+{yyval = new MenosUnario(val_peek(0));}
 break;
 case 62:
-//#line 120 "sintac.y"
-{yyval = new Not(val_peek(1),val_peek(0));}
+//#line 121 "sintac.y"
+{yyval = new Not(val_peek(0));}
 break;
 case 63:
-//#line 121 "sintac.y"
+//#line 122 "sintac.y"
 {yyval = val_peek(1);}
 break;
 case 64:
-//#line 122 "sintac.y"
+//#line 123 "sintac.y"
 {yyval = new LlamadaFuncion(val_peek(3),val_peek(1));}
 break;
 case 65:
-//#line 123 "sintac.y"
+//#line 124 "sintac.y"
 {yyval = new AccesoArray(val_peek(3),val_peek(1));}
 break;
 case 66:
-//#line 124 "sintac.y"
+//#line 125 "sintac.y"
 {yyval = new Cast(val_peek(4),val_peek(1));}
 break;
-//#line 973 "Parser.java"
+//#line 974 "Parser.java"
 //########## END OF USER-SUPPLIED ACTIONS ##########
     }//switch
     //#### Now let's reduce... ####

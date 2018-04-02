@@ -11,7 +11,7 @@ import visitor.*;
 
 public class DefFuncion extends AbstractDefinition {
 
-	public DefFuncion(String ident, Type tipo, List<Definition> defParametros, List<Definition> defVarLocal, List<Statement> sentencias) {
+	public DefFuncion(String ident, Type tipo, List<DefVariable> defParametros, List<DefVariable> defVarLocal, List<Statement> sentencias) {
 		this.tipo = tipo;
 		this.ident = ident;
 		this.defParametros = defParametros;
@@ -25,8 +25,8 @@ public class DefFuncion extends AbstractDefinition {
 	public DefFuncion(Object ident, Object tipo, Object defParametros, Object defVarLocal, Object sentencias) {
 		this.tipo = (Type) tipo;
 		this.ident = (ident instanceof Token) ? ((Token)ident).getLexeme() : (String) ident;
-		this.defParametros = (List<Definition>) defParametros;
-		this.defVarLocal = (List<Definition>) defVarLocal;
+		this.defParametros = (List<DefVariable>) defParametros;
+		this.defVarLocal = (List<DefVariable>) defVarLocal;
 		this.sentencias = (List<Statement>) sentencias;
 
 		searchForPositions(ident, tipo, defParametros, defVarLocal, sentencias);	// Obtener linea/columna a partir de los hijos
@@ -46,17 +46,17 @@ public class DefFuncion extends AbstractDefinition {
 		this.tipo = tipo;
 	}
 
-	public List<Definition> getDefParametros() {
+	public List<DefVariable> getDefParametros() {
 		return defParametros;
 	}
-	public void setDefParametros(List<Definition> defParametros) {
+	public void setDefParametros(List<DefVariable> defParametros) {
 		this.defParametros = defParametros;
 	}
 
-	public List<Definition> getDefVarLocal() {
+	public List<DefVariable> getDefVarLocal() {
 		return defVarLocal;
 	}
-	public void setDefVarLocal(List<Definition> defVarLocal) {
+	public void setDefVarLocal(List<DefVariable> defVarLocal) {
 		this.defVarLocal = defVarLocal;
 	}
 
@@ -74,8 +74,8 @@ public class DefFuncion extends AbstractDefinition {
 
 	private String ident;
 	private Type tipo;
-	private List<Definition> defParametros;
-	private List<Definition> defVarLocal;
+	private List<DefVariable> defParametros;
+	private List<DefVariable> defVarLocal;
 	private List<Statement> sentencias;
 }
 

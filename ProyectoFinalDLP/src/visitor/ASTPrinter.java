@@ -286,24 +286,22 @@ public class ASTPrinter extends DefaultVisitor {
 		return null;
 	}
 
-	//	class MenosUnario { String operador;  Expression expresion; }
+	//	class MenosUnario { Expression expresion; }
 	public Object visit(MenosUnario node, Object param) {
 		int indent = ((Integer)param).intValue();
 
 		printName(indent, "MenosUnario", node, false);
 
-		print(indent + 1, "operador", "String", node.getOperador());
 		visit(indent + 1, "expresion", "Expression",node.getExpresion());
 		return null;
 	}
 
-	//	class Not { String operador;  Expression expresion; }
+	//	class Not { Expression expresion; }
 	public Object visit(Not node, Object param) {
 		int indent = ((Integer)param).intValue();
 
 		printName(indent, "Not", node, false);
 
-		print(indent + 1, "operador", "String", node.getOperador());
 		visit(indent + 1, "expresion", "Expression",node.getExpresion());
 		return null;
 	}

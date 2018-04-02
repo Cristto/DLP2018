@@ -6,29 +6,20 @@ package ast;
 
 import visitor.*;
 
-//	menosUnario:expression -> operador:String  expresion:expression
+//	menosUnario:expression -> expresion:expression
 
 public class MenosUnario extends AbstractExpression {
 
-	public MenosUnario(String operador, Expression expresion) {
-		this.operador = operador;
+	public MenosUnario(Expression expresion) {
 		this.expresion = expresion;
 
 		searchForPositions(expresion);	// Obtener linea/columna a partir de los hijos
 	}
 
-	public MenosUnario(Object operador, Object expresion) {
-		this.operador = (operador instanceof Token) ? ((Token)operador).getLexeme() : (String) operador;
+	public MenosUnario(Object expresion) {
 		this.expresion = (Expression) expresion;
 
-		searchForPositions(operador, expresion);	// Obtener linea/columna a partir de los hijos
-	}
-
-	public String getOperador() {
-		return operador;
-	}
-	public void setOperador(String operador) {
-		this.operador = operador;
+		searchForPositions(expresion);	// Obtener linea/columna a partir de los hijos
 	}
 
 	public Expression getExpresion() {
@@ -43,7 +34,6 @@ public class MenosUnario extends AbstractExpression {
 		return v.visit(this, param);
 	}
 
-	private String operador;
 	private Expression expresion;
 }
 

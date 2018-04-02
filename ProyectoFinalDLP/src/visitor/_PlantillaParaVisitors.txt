@@ -263,7 +263,7 @@ public class <nombre clase> extends DefaultVisitor {
 		return null;
 	}
 
-	//	class MenosUnario { String operador;  Expression expresion; }
+	//	class MenosUnario { Expression expresion; }
 	public Object visit(MenosUnario node, Object param) {
 
 		// super.visit(node, param);
@@ -274,7 +274,7 @@ public class <nombre clase> extends DefaultVisitor {
 		return null;
 	}
 
-	//	class Not { String operador;  Expression expresion; }
+	//	class Not { Expression expresion; }
 	public Object visit(Not node, Object param) {
 
 		// super.visit(node, param);

@@ -7,6 +7,7 @@ package ast;
 public abstract class AbstractExpression extends AbstractTraceable implements Expression {
 
 	private boolean lvalue;
+	private Type tipo;
 	
 	@Override
     public boolean isLvalue() {
@@ -17,6 +18,18 @@ public abstract class AbstractExpression extends AbstractTraceable implements Ex
     public void setLvalue(boolean lvalue) {
 	this.lvalue = lvalue;
     }
+    
+    @Override
+    public Type getTipo() {
+    	return tipo;
+    }
+    
+    @Override
+    public void setTipo(Type tipo) {
+    	this.tipo = tipo;
+    	
+    }
 	
+    
 }
 

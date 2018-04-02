@@ -6,29 +6,20 @@ package ast;
 
 import visitor.*;
 
-//	not:expression -> operador:String  expresion:expression
+//	not:expression -> expresion:expression
 
 public class Not extends AbstractExpression {
 
-	public Not(String operador, Expression expresion) {
-		this.operador = operador;
+	public Not(Expression expresion) {
 		this.expresion = expresion;
 
 		searchForPositions(expresion);	// Obtener linea/columna a partir de los hijos
 	}
 
-	public Not(Object operador, Object expresion) {
-		this.operador = (operador instanceof Token) ? ((Token)operador).getLexeme() : (String) operador;
+	public Not(Object expresion) {
 		this.expresion = (Expression) expresion;
 
-		searchForPositions(operador, expresion);	// Obtener linea/columna a partir de los hijos
-	}
-
-	public String getOperador() {
-		return operador;
-	}
-	public void setOperador(String operador) {
-		this.operador = operador;
+		searchForPositions(expresion);	// Obtener linea/columna a partir de los hijos
 	}
 
 	public Expression getExpresion() {
@@ -43,7 +34,6 @@ public class Not extends AbstractExpression {
 		return v.visit(this, param);
 	}
 
-	private String operador;
 	private Expression expresion;
 }
 
