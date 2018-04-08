@@ -3,41 +3,42 @@ package semantico;
 import java.util.ArrayList;
 import java.util.List;
 
-import ast.AccesoArray;
-import ast.AccesoStruct;
-import ast.ArrayTipo;
-import ast.Asignacion;
-import ast.Cast;
-import ast.CharTipo;
-import ast.Comparacion;
-import ast.DefCampo;
-import ast.DefFuncion;
-import ast.DefVariable;
-import ast.ExpresionAritmetica;
-import ast.ExpresionLogica;
-import ast.Expression;
-import ast.FuncionTipo;
-import ast.IdentTipo;
-import ast.IfElse;
-import ast.IntTipo;
-import ast.Invocacion;
-import ast.LitChar;
-import ast.LitInt;
-import ast.LitReal;
-import ast.LlamadaFuncion;
-import ast.MenosUnario;
-import ast.Not;
 import ast.Position;
-import ast.Print;
-import ast.Println;
-import ast.Printsp;
-import ast.Read;
-import ast.RealTipo;
-import ast.Return;
-import ast.Type;
-import ast.Variable;
-import ast.VoidTipo;
-import ast.While;
+import ast.definitions.DefCampo;
+import ast.definitions.DefFuncion;
+import ast.definitions.DefVariable;
+import ast.definitions.Definition;
+import ast.expressions.AccesoArray;
+import ast.expressions.AccesoStruct;
+import ast.expressions.Cast;
+import ast.expressions.Comparacion;
+import ast.expressions.ExpresionAritmetica;
+import ast.expressions.ExpresionLogica;
+import ast.expressions.Expression;
+import ast.expressions.LitChar;
+import ast.expressions.LitInt;
+import ast.expressions.LitReal;
+import ast.expressions.LlamadaFuncion;
+import ast.expressions.MenosUnario;
+import ast.expressions.Not;
+import ast.expressions.Variable;
+import ast.statements.Asignacion;
+import ast.statements.IfElse;
+import ast.statements.Invocacion;
+import ast.statements.Print;
+import ast.statements.Println;
+import ast.statements.Printsp;
+import ast.statements.Read;
+import ast.statements.Return;
+import ast.statements.While;
+import ast.types.ArrayTipo;
+import ast.types.CharTipo;
+import ast.types.TipoFuncion;
+import ast.types.TipoStruct;
+import ast.types.IntTipo;
+import ast.types.RealTipo;
+import ast.types.Type;
+import ast.types.VoidTipo;
 import main.GestorErrores;
 import visitor.DefaultVisitor;
 
@@ -58,14 +59,10 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 	//	class DefFuncion { String ident;  Type tipo;  List<Definition> defParametros;  List<Definition> defVarLocal;  List<Statement> sentencias; }
 	public Object visit(DefFuncion node, Object param) {
 
-		if(!esVoid(node.getTipo()) && !esSimple(((FuncionTipo)node.getTipo()).getTipoRetorno()))
+		node.getTipo().accept(this, param);
+		visitChildren(node.getDefParametros(), param);
+		if(!esVoid(node.getTipo()) && !esSimple(((TipoFuncion)node.getTipo()).getTipoRetorno()))
 			gestorErrores.error("Fase tipos","Error: Retorno de tipo no simple "+node.getTipo(), node.getStart());
-		for (int i = 0; i < node.getDefParametros().size(); i++) {
-			if(!esSimple(node.getDefParametros().get(i).getTipo()))
-				gestorErrores.error("Fase tipos","Error: Los parametros deben"
-						+ "de tipo primitivo "+node.getTipo(), node.getStart());
-				
-		}
 		visitChildren(node.getDefVarLocal(), param);
 		visitChildren(node.getSentencias(), node.getTipo());
 		
@@ -75,12 +72,9 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 	//	class IfElse { Expression condicion;  List<Statement> sentenciasIf;  List<Statement> sentenciasElse; }
 	public Object visit(IfElse node, Object param) {
 
-		node.getCondicion().accept(this, param);
-		node.getCondicion().setTipo(node.getCondicion().getTipo());
+		super.visit(node, param);
 		if(!esLogico(node.getCondicion().getTipo()))
 			gestorErrores.error("Fase tipos","La condicion debe ser de tipo entero "+node.getCondicion(), node.getStart());
-		visitChildren(node.getSentenciasIf(), param);
-		visitChildren(node.getSentenciasElse(), param);
 		return null;
 	}
 
@@ -90,8 +84,6 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 		super.visit(node, param);
 		if(!esLogico(node.getCondicion().getTipo()))
 			gestorErrores.error("Fase tipos","La condicion debe ser de tipo entero "+node.getCondicion(), node.getStart());
-		
-		visitChildren(node.getSentencias(), param);
 		return null;
 	}
 
@@ -101,9 +93,7 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 		super.visit(node, param);
 		if (!esSimple(node.getExpresion().getTipo()))
 			gestorErrores.error("Fase tipos","Error: debe de ser de tipo simple", node.getStart());
-		if (!node.getExpresion().isLvalue())
-			gestorErrores.error("Fase tipos","debe ser modificable ", node.getStart());
-		return false;
+		return null;
 	}
 
 	//	class Print { Expression expresion; }
@@ -114,7 +104,7 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 		if (node.getExpresion().getTipo() != null && !esSimple(node.getExpresion().getTipo()))
 			gestorErrores.error("Fase tipos","debe ser de tipo simple ", node.getStart());
 
-		return false;
+		return null;
 	}
 
 	//	class Printsp { Expression expresion; }
@@ -125,7 +115,7 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 		if (node.getExpresion().getTipo() != null && !esSimple(node.getExpresion().getTipo()))
 			gestorErrores.error("Fase tipos","debe ser de tipo simple ", node.getStart());
 
-		return false;
+		return null;
 	}
 
 	//	class Println { Expression expresion; }
@@ -136,7 +126,7 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 		if (node.getExpresion().getTipo() != null && !esSimple(node.getExpresion().getTipo()))
 			gestorErrores.error("Fase tipos","debe ser de tipo simple ", node.getStart());
 
-		return false;
+		return null;
 	}
 
 	//	class Asignacion { Expression leftExpr;  Expression rightExpr; }
@@ -145,12 +135,9 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 		super.visit(node, param);
 		if (!esSimple(node.getLeftExpr().getTipo()))
 			gestorErrores.error("Fase tipos","la izquierda tiene que ser de tipo simple ", node.getStart());
-		else if (!node.getLeftExpr().isLvalue())
-			gestorErrores.error("Fase tipos","la izquierda de la asignacion "
-					+ "no es modificable ", node.getStart());
 		else if (node.getLeftExpr().getTipo() != node.getRightExpr().getTipo())
 			gestorErrores.error("Fase tipos","valores de distinto tipo ", node.getStart());
-		return false;
+		return null;
 	}
 
 	//	class Return { Expression expresion; }
@@ -165,19 +152,22 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 			gestorErrores.error("Fase tipos","el retorno no coincide con "
 					+ "el retorno de la funcion ", node.getStart());
 
-		return true;
+		return null;
 	}
 
 	//	class Invocacion { String ident;  List<Expression> argumentos; }
 	public Object visit(Invocacion node, Object param) {
-
-		List<DefVariable> parametros = node.getDefFuncion().getDefParametros();
-		List<Expression> argumentos = node.getArgumentos();
 		super.visit(node, param);
-		if (!isArgumentosValido(parametros, argumentos))
-			gestorErrores.error("Fase tipos","Los parametros y los argumentos no coinciden ", node.getStart());
 
-		return false;
+		if(node.getDefFuncion().getTipo() instanceof TipoFuncion) {
+			if (!isArgumentosValido(node.getDefFuncion().getDefParametros(), node.getArgumentos()))
+				gestorErrores.error("Fase tipos","los argumentos y los parametros no coinciden", node.getStart());
+
+		} else {
+
+			gestorErrores.error("Fase tipos","No es de tipo funcion", node.getStart());
+		}
+		return null;
 	}
 
 	//	class ExpresionAritmetica { Expression leftExpr;  String operador;  Expression rightExpr; }
@@ -186,7 +176,7 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 		super.visit(node, param);
 		if (!mismoTipo(node.getLeftExpr().getTipo(), node.getRightExpr().getTipo()))
 			gestorErrores.error("Fase tipos","Los operandos deben ser del mismo tipo ", node.getStart());
-		else if (!esAritmetico(node.getLeftExpr().getTipo()) || !esAritmetico(node.getRightExpr().getTipo()))
+		else if (!esAritmetico(node.getLeftExpr().getTipo()))
 			gestorErrores.error("Fase tipos","Los operandos deben ser de tipo entero o real ", node.getStart());
 		node.setTipo(node.getLeftExpr().getTipo());
 		return null;
@@ -198,7 +188,7 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 		super.visit(node, param);
 		if (!mismoTipo(node.getLeftExpr().getTipo(), node.getRightExpr().getTipo()))
 			gestorErrores.error("Fase tipos","Las expresiones deben ser del mismo tipo ", node.getStart());
-		else if (!esAritmetico(node.getLeftExpr().getTipo()) || !esAritmetico(node.getRightExpr().getTipo()))
+		else if (!esAritmetico(node.getLeftExpr().getTipo()))
 			gestorErrores.error("Fase tipos","Las expresiones deben ser de tipo entero o real ", node.getStart());
 		node.setTipo(new IntTipo());
 		return null;
@@ -254,20 +244,21 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 
 	//	class AccesoStruct { Expression ident;  String campo; }
 	public Object visit(AccesoStruct node, Object param) {
-
+		boolean existe = false;
 		super.visit(node, param);
-		if (!(node.getIdent().getTipo() instanceof IdentTipo))
+		if (!(node.getIdent().getTipo() instanceof TipoStruct))
 			gestorErrores.error("Fase tipos","debe ser de tipo struct", node.getStart());
 		else {
-			IdentTipo tipo = (IdentTipo) node.getIdent().getTipo();
-		    List<String> nombreCampos = new ArrayList<>();
-		    List<DefCampo> camposStruct = tipo.getDefstruct().getCampos();
-		    for (DefCampo cs : camposStruct) {
-			nombreCampos.add(cs.getIdent());
-			if (cs.getIdent().equals(node.getIdent()))
-			    node.setTipo(cs.getTipo());
+			TipoStruct tipo = (TipoStruct) node.getIdent().getTipo();
+		    List<Definition> camposStruct = tipo.getDefstruct().getCampos();
+		    for (Definition cs : camposStruct) {
+		    	if (cs.getNombre().equals(node.getCampo())) {
+		    		existe = true;
+		    		node.setTipo(cs.getTipo());
+		    		break;
+		    	}
 		    }
-		    if (!nombreCampos.contains(node.getIdent()))
+		    if (!existe)
 		    	gestorErrores.error("Fase tipos","el campo "+node.getIdent()+" no definido", node.getStart());
 		}
 		return null;
@@ -281,18 +272,16 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 
 	//	class LlamadaFuncion { String ident;  List<Expression> argumentos; }
 	public Object visit(LlamadaFuncion node, Object param) {
-
-		List<DefVariable> parametros = node.getDefFuncion().getDefParametros();
-		List<Expression> argumentos = node.getArgumentos();
-		Type retorno = node.getDefFuncion().getTipo();
 		super.visit(node, param);
-		if (!isArgumentosValido(parametros, argumentos))
+		if(node.getDefFuncion().getTipo() instanceof TipoFuncion) {
+		if (!isArgumentosValido(node.getDefFuncion().getDefParametros(), node.getArgumentos()))
 			gestorErrores.error("Fase tipos","los argumentos y los parametros no coinciden", node.getStart());
 
-		if (retorno == null)
-			gestorErrores.error("Fase tipos","La funcion no tiene retorno", node.getStart());
-		else
-		    node.setTipo(getTipoFuncion((node.getDefFuncion().getTipo())));
+		    node.setTipo(((TipoFuncion) node.getDefFuncion().getTipo()).getTipoRetorno());
+		} else {
+
+			gestorErrores.error("Fase tipos","No es de tipo funcion", node.getStart());
+		}
 		return null;
 	}
 
@@ -300,14 +289,15 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 	public Object visit(Cast node, Object param) {
 
 		super.visit(node, param);
-		node.setTipo(node.getTipo());
+		node.setTipo(node.getTipoDinamico());
 		if (!esSimple(node.getTipo()))
 			gestorErrores.error("Fase tipos","se tiene que castear con un tipo simple", node.getStart());
 		if (!esSimple(node.getExpresion().getTipo()))
 			gestorErrores.error("Fase tipos","las expresiones que se castean"
 					+ "deben ser de tipo simple", node.getStart());
-		if (mismoTipo(node.getTipo(), node.getExpresion().getTipo()))
-			gestorErrores.error("Fase tipos","tienen que ser de distinto tipo", node.getStart());
+		//Si hay errores el tipo del cast deberia ser tipoError
+		/*if (mismoTipo(node.getTipo(), node.getExpresion().getTipo()))
+			gestorErrores.error("Fase tipos","tienen que ser de distinto tipo", node.getStart());*/
 		return null;
 	}
 
@@ -361,8 +351,8 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 	}
 	
 	private Type getTipoFuncion(Type tipo){
-		if(tipo instanceof FuncionTipo)
-			return ((FuncionTipo) tipo).getTipoRetorno();
+		if(tipo instanceof TipoFuncion)
+			return ((TipoFuncion) tipo).getTipoRetorno();
 		else
 			return tipo;
 	}

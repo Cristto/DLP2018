@@ -5,6 +5,39 @@
 package visitor;
 
 import ast.*;
+import ast.definitions.DefCampo;
+import ast.definitions.DefFuncion;
+import ast.definitions.DefStruct;
+import ast.definitions.DefVariable;
+import ast.expressions.AccesoArray;
+import ast.expressions.AccesoStruct;
+import ast.expressions.Cast;
+import ast.expressions.Comparacion;
+import ast.expressions.ExpresionAritmetica;
+import ast.expressions.ExpresionLogica;
+import ast.expressions.LitChar;
+import ast.expressions.LitInt;
+import ast.expressions.LitReal;
+import ast.expressions.LlamadaFuncion;
+import ast.expressions.MenosUnario;
+import ast.expressions.Not;
+import ast.expressions.Variable;
+import ast.statements.Asignacion;
+import ast.statements.IfElse;
+import ast.statements.Invocacion;
+import ast.statements.Print;
+import ast.statements.Println;
+import ast.statements.Printsp;
+import ast.statements.Read;
+import ast.statements.Return;
+import ast.statements.While;
+import ast.types.ArrayTipo;
+import ast.types.CharTipo;
+import ast.types.TipoFuncion;
+import ast.types.TipoStruct;
+import ast.types.IntTipo;
+import ast.types.RealTipo;
+import ast.types.VoidTipo;
 
 public interface Visitor {
 	public Object visit(Program node, Object param);
@@ -37,8 +70,8 @@ public interface Visitor {
 	public Object visit(IntTipo node, Object param);
 	public Object visit(RealTipo node, Object param);
 	public Object visit(CharTipo node, Object param);
-	public Object visit(IdentTipo node, Object param);
+	public Object visit(TipoStruct node, Object param);
 	public Object visit(ArrayTipo node, Object param);
-	public Object visit(FuncionTipo node, Object param);
+	public Object visit(TipoFuncion node, Object param);
 	public Object visit(VoidTipo node, Object param);
 }

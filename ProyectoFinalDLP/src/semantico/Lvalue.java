@@ -1,18 +1,18 @@
 package semantico;
 
-import ast.AccesoArray;
-import ast.AccesoStruct;
-import ast.Cast;
-import ast.Comparacion;
-import ast.ExpresionAritmetica;
-import ast.ExpresionLogica;
-import ast.LitChar;
-import ast.LitInt;
-import ast.LitReal;
-import ast.LlamadaFuncion;
-import ast.MenosUnario;
-import ast.Not;
-import ast.Variable;
+import ast.expressions.AccesoArray;
+import ast.expressions.AccesoStruct;
+import ast.expressions.Cast;
+import ast.expressions.Comparacion;
+import ast.expressions.ExpresionAritmetica;
+import ast.expressions.ExpresionLogica;
+import ast.expressions.LitChar;
+import ast.expressions.LitInt;
+import ast.expressions.LitReal;
+import ast.expressions.LlamadaFuncion;
+import ast.expressions.MenosUnario;
+import ast.expressions.Not;
+import ast.expressions.Variable;
 import visitor.DefaultVisitor;
 
 public class Lvalue extends DefaultVisitor{

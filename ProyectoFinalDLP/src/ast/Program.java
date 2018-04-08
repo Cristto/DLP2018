@@ -5,6 +5,8 @@
 package ast;
 
 import java.util.*;
+
+import ast.definitions.Definition;
 import visitor.*;
 
 //	program -> definiciones:definition*

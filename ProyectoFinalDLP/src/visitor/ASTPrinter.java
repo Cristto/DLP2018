@@ -7,6 +7,40 @@ package visitor;
 import java.io.*;
 
 import ast.*;
+import ast.definitions.DefCampo;
+import ast.definitions.DefFuncion;
+import ast.definitions.DefStruct;
+import ast.definitions.DefVariable;
+import ast.expressions.AccesoArray;
+import ast.expressions.AccesoStruct;
+import ast.expressions.Cast;
+import ast.expressions.Comparacion;
+import ast.expressions.ExpresionAritmetica;
+import ast.expressions.ExpresionLogica;
+import ast.expressions.LitChar;
+import ast.expressions.LitInt;
+import ast.expressions.LitReal;
+import ast.expressions.LlamadaFuncion;
+import ast.expressions.MenosUnario;
+import ast.expressions.Not;
+import ast.expressions.Variable;
+import ast.statements.Asignacion;
+import ast.statements.IfElse;
+import ast.statements.Invocacion;
+import ast.statements.Print;
+import ast.statements.Println;
+import ast.statements.Printsp;
+import ast.statements.Read;
+import ast.statements.Return;
+import ast.statements.While;
+import ast.types.ArrayTipo;
+import ast.types.CharTipo;
+import ast.types.TipoFuncion;
+import ast.types.TipoStruct;
+import ast.types.IntTipo;
+import ast.types.RealTipo;
+import ast.types.VoidTipo;
+
 import java.util.*;
 
 /**
@@ -114,7 +148,7 @@ public class ASTPrinter extends DefaultVisitor {
 
 		printName(indent, "DefVariable", node, false);
 
-		print(indent + 1, "ident", "String", node.getIdent());
+		print(indent + 1, "ident", "String", node.getNombre());
 		visit(indent + 1, "tipo", "Type",node.getTipo());
 		return null;
 	}
@@ -125,7 +159,7 @@ public class ASTPrinter extends DefaultVisitor {
 
 		printName(indent, "DefFuncion", node, false);
 
-		print(indent + 1, "ident", "String", node.getIdent());
+		print(indent + 1, "ident", "String", node.getNombre());
 		visit(indent + 1, "tipo", "Type",node.getTipo());
 		visit(indent + 1, "defParametros", "List<Definition>",node.getDefParametros());
 		visit(indent + 1, "defVarLocal", "List<Definition>",node.getDefVarLocal());
@@ -139,7 +173,7 @@ public class ASTPrinter extends DefaultVisitor {
 
 		printName(indent, "DefStruct", node, false);
 
-		print(indent + 1, "ident", "String", node.getIdent());
+		print(indent + 1, "ident", "String", node.getNombre());
 		visit(indent + 1, "campos", "List<Definition>",node.getCampos());
 		return null;
 	}
@@ -150,7 +184,7 @@ public class ASTPrinter extends DefaultVisitor {
 
 		printName(indent, "DefCampo", node, false);
 
-		print(indent + 1, "ident", "String", node.getIdent());
+		print(indent + 1, "ident", "String", node.getNombre());
 		visit(indent + 1, "tipo", "Type",node.getTipo());
 		return null;
 	}
@@ -416,7 +450,7 @@ public class ASTPrinter extends DefaultVisitor {
 	}
 
 	//	class IdentTipo { String valor; }
-	public Object visit(IdentTipo node, Object param) {
+	public Object visit(TipoStruct node, Object param) {
 		int indent = ((Integer)param).intValue();
 
 		printCompact(indent, "IdentTipo", node, "valor", node.getValor());
@@ -435,7 +469,7 @@ public class ASTPrinter extends DefaultVisitor {
 	}
 
 	//	class FuncionTipo { Type tipoRetorno; }
-	public Object visit(FuncionTipo node, Object param) {
+	public Object visit(TipoFuncion node, Object param) {
 		int indent = ((Integer)param).intValue();
 
 		printName(indent, "FuncionTipo", node, false);

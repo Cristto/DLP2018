@@ -7,6 +7,10 @@ package sintactico;
 import java.io.*;
 import java.util.*;
 import ast.*;
+import ast.definitions.*;
+import ast.expressions.*;
+import ast.statements.*;
+import ast.types.*;
 import main.*;
 
 %}
@@ -71,7 +75,7 @@ defCampo: 'IDENT' ':' tipo ';' {$$ = new DefCampo($1,$3);}
 tipo: 'INT' 				{$$ = new IntTipo();}
  |	'REAL'					{$$ = new RealTipo();}
  |	'CHAR'					{$$ = new CharTipo();}
- |	'IDENT'					{$$ = new IdentTipo($1);}
+ |	'IDENT'					{$$ = new TipoStruct($1);}
  |	'[' 'LITENT' ']' tipo	{$$ = new ArrayTipo($2,$4);}
  ;
 

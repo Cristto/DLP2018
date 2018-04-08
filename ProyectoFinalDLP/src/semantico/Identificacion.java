@@ -1,18 +1,18 @@
 package semantico;
 
-import ast.ArrayTipo;
-import ast.DefCampo;
-import ast.DefFuncion;
-import ast.DefStruct;
-import ast.DefVariable;
-import ast.Definition;
-import ast.IdentTipo;
-import ast.Invocacion;
-import ast.LlamadaFuncion;
 import ast.Position;
-import ast.Return;
-import ast.Variable;
-import ast.VoidTipo;
+import ast.definitions.DefCampo;
+import ast.definitions.DefFuncion;
+import ast.definitions.DefStruct;
+import ast.definitions.DefVariable;
+import ast.definitions.Definition;
+import ast.expressions.LlamadaFuncion;
+import ast.expressions.Variable;
+import ast.statements.Invocacion;
+import ast.statements.Return;
+import ast.types.ArrayTipo;
+import ast.types.TipoStruct;
+import ast.types.VoidTipo;
 import main.GestorErrores;
 import semantico.context.ContextMap;
 import visitor.DefaultVisitor;
@@ -48,10 +48,10 @@ public class Identificacion extends DefaultVisitor {
 		//predicado(funciones.getFromAny(node.getIdent()) == null, "funcion repetida", node.getStart());
 		//funciones.put(node.getIdent(), node);
 		
-		if (funciones.getFromAny(node.getIdent()) != null) {
-		    gestorErrores.error("Identificacion", "Funcion " + node.getIdent() + " ya definida", node.getStart());
+		if (funciones.getFromAny(node.getNombre()) != null) {
+		    gestorErrores.error("Identificacion", "Funcion " + node.getNombre() + " ya definida", node.getStart());
 		} else {
-		    funciones.put(node.getIdent(), node);
+		    funciones.put(node.getNombre(), node);
 
 		}
 		
@@ -91,14 +91,14 @@ public class Identificacion extends DefaultVisitor {
 	public Object visit(DefVariable node, Object param){				
 			
 		
-		Definition defVar = variables.getFromTop(node.getIdent());
+		Definition defVar = variables.getFromTop(node.getNombre());
 		
 		if(defVar ==  null){
-			variables.put(node.getIdent(), node);
+			variables.put(node.getNombre(), node);
 			super.visit(node, param);
 		}
 		else
-			gestorErrores.error("Identificacion", node.getIdent() + " ya esta definida", node.getStart());
+			gestorErrores.error("Identificacion", node.getNombre() + " ya esta definida", node.getStart());
 		
 		
 		
@@ -119,12 +119,12 @@ public class Identificacion extends DefaultVisitor {
 	
 	public Object visit(DefStruct node, Object param) {
 		
-		DefStruct defStruct = structs.getFromAny(node.getIdent());
+		DefStruct defStruct = structs.getFromAny(node.getNombre());
 		
 		if(defStruct == null)
-			structs.put(node.getIdent(), node);
+			structs.put(node.getNombre(), node);
 		else
-			gestorErrores.error("Identificación", node.getIdent()+" ya definida", node.getStart());
+			gestorErrores.error("Identificación", node.getNombre()+" ya definida", node.getStart());
 		
 		//predicado(structs.getFromAny(node.getIdent()) == null,"estructura repetida",node.getStart());
 		//structs.put(node.getIdent(), node);
@@ -145,12 +145,12 @@ public class Identificacion extends DefaultVisitor {
 	public Object visit(DefCampo node, Object param){
 		
 				
-		DefCampo defCampo = campos.getFromTop(node.getIdent());
+		DefCampo defCampo = campos.getFromTop(node.getNombre());
 		
 		if(defCampo == null)
-			campos.put(node.getIdent(), node);
+			campos.put(node.getNombre(), node);
 		else
-			gestorErrores.error("Identificacion","el campo "+ node.getIdent()+" ya esta repetido", node.getStart());
+			gestorErrores.error("Identificacion","el campo "+ node.getNombre()+" ya esta repetido", node.getStart());
 			
 		//campos.set();
 		super.visit(node, param);
@@ -163,7 +163,7 @@ public class Identificacion extends DefaultVisitor {
 		return null;
 	}
 	
-	public Object visit(IdentTipo node, Object param) {
+	public Object visit(TipoStruct node, Object param) {
 		
 		if(structs.getFromAny(node.getValor()) == null)
 			gestorErrores.error("Identidicacion", node.getValor()+" no definido", node.getStart());
