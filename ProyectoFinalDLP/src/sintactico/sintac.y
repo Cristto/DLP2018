@@ -48,10 +48,10 @@ defVariablesOpt: defVariablesOpt defVariable  {$$ = $1; ((List)$1).add($2);}
 
 defVariable: 'VAR' 'IDENT' ':' tipo ';' {$$ = new DefVariable($2,$4);}
 
-defFuncion: 'IDENT' '(' parametrosOpt ')' retornoOpt '{' defVariablesOpt sentenciasOpt '}' {$$ = new DefFuncion($1,$5,$3,$7,$8);}
+defFuncion: 'IDENT' '(' parametrosOpt ')' retornoOpt '{' defVariablesOpt sentenciasOpt '}' {$$ = new DefFuncion($1,new TipoFuncion($5, $3),$7,$8);}
 	;
 
-retornoOpt: ':' tipo {$$ = new FuncionTipo($2);}
+retornoOpt: ':' tipo {$$ = new TipoFuncion($2);}
 	|				 {$$ = new VoidTipo();}
 	;
 parametrosOpt: defParametros 	{$$ = $1;}
@@ -63,7 +63,7 @@ defParametros: defParametros ',' defParametro	{$$=$1;  ((List)$$).add($3); }
 defParametro: 'IDENT' ':' tipo 		{$$ = new DefVariable($1,$3);}
 	;
 
-defStruct: 'STRUCT' 'IDENT' '{' camposOpt '}' ';' {$$ = new DefStruct($2,$4);}
+defStruct: 'STRUCT' 'IDENT' '{' camposOpt '}' ';' {$$ = new DefStruct($2,new TipoStruct($2),$4);}
 	;
 
 camposOpt: camposOpt defCampo  { $$ = $1; ((List)$1).add($2);}
@@ -72,9 +72,9 @@ camposOpt: camposOpt defCampo  { $$ = $1; ((List)$1).add($2);}
 defCampo: 'IDENT' ':' tipo ';' {$$ = new DefCampo($1,$3);}
 	;
 
-tipo: 'INT' 				{$$ = new IntTipo();}
- |	'REAL'					{$$ = new RealTipo();}
- |	'CHAR'					{$$ = new CharTipo();}
+tipo: 'INT' 				{$$ = IntTipo.getInstance();}
+ |	'REAL'					{$$ = RealTipo.getInstance();}
+ |	'CHAR'					{$$ = CharTipo.getInstance();}
  |	'IDENT'					{$$ = new TipoStruct($1);}
  |	'[' 'LITENT' ']' tipo	{$$ = new ArrayTipo($2,$4);}
  ;

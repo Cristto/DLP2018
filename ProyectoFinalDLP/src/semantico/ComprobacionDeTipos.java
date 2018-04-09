@@ -190,7 +190,7 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 			gestorErrores.error("Fase tipos","Las expresiones deben ser del mismo tipo ", node.getStart());
 		else if (!esAritmetico(node.getLeftExpr().getTipo()))
 			gestorErrores.error("Fase tipos","Las expresiones deben ser de tipo entero o real ", node.getStart());
-		node.setTipo(new IntTipo());
+		node.setTipo(IntTipo.getInstance());
 		return null;
 	}
 
@@ -222,7 +222,7 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 		if (!esLogico(node.getExpresion().getTipo())) {
 			gestorErrores.error("Fase tipos","debe ser de tipo entero", node.getStart());
 		}
-		node.setTipo(new IntTipo());
+		node.setTipo(IntTipo.getInstance());
 		return null;
 	}
 
@@ -303,21 +303,21 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 
 	//	class LitInt { int valor; }
 	public Object visit(LitInt node, Object param) {
-		node.setTipo(new IntTipo());
+		node.setTipo(IntTipo.getInstance());
 
 		return null;
 	}
 
 	//	class LitReal { float valor; }
 	public Object visit(LitReal node, Object param) {
-		node.setTipo(new RealTipo());
+		node.setTipo(RealTipo.getInstance());
 
 		return null;
 	}
 
 	//	class LitChar { char valor; }
 	public Object visit(LitChar node, Object param) {
-		node.setTipo(new CharTipo());
+		node.setTipo(CharTipo.getInstance());
 
 		return null;
 	}

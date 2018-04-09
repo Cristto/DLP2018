@@ -18,7 +18,6 @@ public class DefFuncion extends AbstractDefinition {
 	public DefFuncion(String ident, Type retorno, List<DefVariable> defParametros, List<DefVariable> defVarLocal, List<Statement> sentencias) {
 
 		super(ident, retorno);
-		this.defParametros = defParametros;
 		this.defVarLocal = defVarLocal;
 		this.sentencias = sentencias;
 
@@ -28,18 +27,10 @@ public class DefFuncion extends AbstractDefinition {
 	@SuppressWarnings("unchecked")
 	public DefFuncion(Object ident, Object tipo, Object defParametros, Object defVarLocal, Object sentencias) {
 		super((ident instanceof Token) ? ((Token) ident).getLexeme() : (String) ident, (Type) tipo);
-		this.defParametros = (List<DefVariable>) defParametros;
 		this.defVarLocal = (List<DefVariable>) defVarLocal;
 		this.sentencias = (List<Statement>) sentencias;
 
 		searchForPositions(ident, tipo, defParametros, defVarLocal, sentencias);	// Obtener linea/columna a partir de los hijos
-	}
-
-	public List<DefVariable> getDefParametros() {
-		return defParametros;
-	}
-	public void setDefParametros(List<DefVariable> defParametros) {
-		this.defParametros = defParametros;
 	}
 
 	public List<DefVariable> getDefVarLocal() {
@@ -61,7 +52,6 @@ public class DefFuncion extends AbstractDefinition {
 		return v.visit(this, param);
 	}
 
-	private List<DefVariable> defParametros;
 	private List<DefVariable> defVarLocal;
 	private List<Statement> sentencias;
 }

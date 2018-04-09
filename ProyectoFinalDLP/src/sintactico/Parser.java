@@ -812,7 +812,7 @@ case 9:
 break;
 case 10:
 //#line 51 "sintac.y"
-{yyval = new DefFuncion(val_peek(8),val_peek(4),val_peek(6),val_peek(2),val_peek(1));}
+{yyval = new DefFuncion(val_peek(8),new TipoFuncion(val_peek(4), val_peek(6)),val_peek(2),val_peek(1));}
 break;
 case 11:
 //#line 54 "sintac.y"
@@ -844,7 +844,7 @@ case 17:
 break;
 case 18:
 //#line 66 "sintac.y"
-{yyval = new DefStruct(val_peek(4),val_peek(2));}
+{yyval = new DefStruct(val_peek(4),new TipoStruct(val_peek(4)),val_peek(2));}
 break;
 case 19:
 //#line 69 "sintac.y"
@@ -860,15 +860,15 @@ case 21:
 break;
 case 22:
 //#line 75 "sintac.y"
-{yyval = new IntTipo();}
+{yyval = IntTipo.getInstance();}
 break;
 case 23:
 //#line 76 "sintac.y"
-{yyval = new RealTipo();}
+{yyval = RealTipo.getInstance();}
 break;
 case 24:
 //#line 77 "sintac.y"
-{yyval = new CharTipo();}
+{yyval = CharTipo.getInstance();}
 break;
 case 25:
 //#line 78 "sintac.y"

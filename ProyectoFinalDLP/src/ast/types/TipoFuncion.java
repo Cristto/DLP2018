@@ -4,20 +4,26 @@
 
 package ast.types;
 
+import java.util.List;
+
+import ast.definitions.Definition;
 import visitor.*;
 
 //	funcionTipo:type -> tipoRetorno:type
 
 public class TipoFuncion extends AbstractType {
 
-	public TipoFuncion(Type tipoRetorno) {
+	public TipoFuncion(Type tipoRetorno, List<Definition> defParametros) {
 		this.tipoRetorno = tipoRetorno;
+		this.defParametros = defParametros;
 
 		searchForPositions(tipoRetorno);	// Obtener linea/columna a partir de los hijos
 	}
 
-	public TipoFuncion(Object tipoRetorno) {
+	@SuppressWarnings("unchecked")
+	public TipoFuncion(Object tipoRetorno, Object defParametros) {
 		this.tipoRetorno = (Type) tipoRetorno;
+		this.defParametros = (List<Definition>) defParametros;
 
 		searchForPositions(tipoRetorno);	// Obtener linea/columna a partir de los hijos
 	}
@@ -28,6 +34,12 @@ public class TipoFuncion extends AbstractType {
 	public void setTipoRetorno(Type tipoRetorno) {
 		this.tipoRetorno = tipoRetorno;
 	}
+	public List<Definition> getDefParametros() {
+		return defParametros;
+	}
+	public void setDefParametros(List<Definition> defParametros) {
+		this.defParametros = defParametros;
+	}
 
 	@Override
 	public Object accept(Visitor v, Object param) { 
@@ -35,5 +47,6 @@ public class TipoFuncion extends AbstractType {
 	}
 
 	private Type tipoRetorno;
+	private List<Definition> defParametros;
 }
 

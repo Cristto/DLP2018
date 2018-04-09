@@ -9,6 +9,17 @@ import visitor.*;
 //	realTipo:type -> 
 
 public class RealTipo extends AbstractType {
+	
+private static RealTipo instance = null;
+	
+	private RealTipo() {
+	}
+	
+	public static RealTipo getInstance() {
+		if(instance == null)
+			instance = new RealTipo();
+		return instance;
+	}
 
 	@Override
 	public Object accept(Visitor v, Object param) { 
