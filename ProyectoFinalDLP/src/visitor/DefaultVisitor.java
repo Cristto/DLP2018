@@ -31,13 +31,13 @@ import ast.statements.Printsp;
 import ast.statements.Read;
 import ast.statements.Return;
 import ast.statements.While;
-import ast.types.ArrayTipo;
+import ast.types.TipoArray;
 import ast.types.CharTipo;
 import ast.types.TipoFuncion;
 import ast.types.TipoStruct;
 import ast.types.IntTipo;
 import ast.types.RealTipo;
-import ast.types.VoidTipo;
+import ast.types.TipoVoid;
 
 import java.util.*;
 
@@ -65,7 +65,7 @@ public class DefaultVisitor implements Visitor {
 	public Object visit(DefFuncion node, Object param) {
 		if (node.getTipo() != null)
 			node.getTipo().accept(this, param);
-		visitChildren(node.getDefParametros(), param);
+		//visitChildren(node.getDefParametros(), param);
 		visitChildren(node.getDefVarLocal(), param);
 		visitChildren(node.getSentencias(), param);
 		return null;
@@ -264,7 +264,7 @@ public class DefaultVisitor implements Visitor {
 	}
 
 	//	class ArrayTipo { int size;  Type tipo; }
-	public Object visit(ArrayTipo node, Object param) {
+	public Object visit(TipoArray node, Object param) {
 		if (node.getTipo() != null)
 			node.getTipo().accept(this, param);
 		return null;
@@ -278,7 +278,7 @@ public class DefaultVisitor implements Visitor {
 	}
 
 	//	class VoidTipo {  }
-	public Object visit(VoidTipo node, Object param) {
+	public Object visit(TipoVoid node, Object param) {
 		return null;
 	}
 	

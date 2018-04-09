@@ -9,16 +9,16 @@ import visitor.*;
 
 //	arrayTipo:type -> size:int  tipo:type
 
-public class ArrayTipo extends AbstractType {
+public class TipoArray extends AbstractType {
 
-	public ArrayTipo(int size, Type tipo) {
-		this.size = size;
+	public TipoArray(int indice, Type tipo) {
+		this.size = indice;
 		this.tipo = tipo;
 
 		searchForPositions(tipo);	// Obtener linea/columna a partir de los hijos
 	}
 
-	public ArrayTipo(Object size, Object tipo) {
+	public TipoArray(Object size, Object tipo) {
 		this.size = (size instanceof Token) ? Integer.parseInt(((Token)size).getLexeme()) : (Integer) size;
 		this.tipo = (Type) tipo;
 

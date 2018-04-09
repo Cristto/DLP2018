@@ -31,14 +31,14 @@ import ast.statements.Printsp;
 import ast.statements.Read;
 import ast.statements.Return;
 import ast.statements.While;
-import ast.types.ArrayTipo;
+import ast.types.TipoArray;
 import ast.types.CharTipo;
 import ast.types.TipoFuncion;
 import ast.types.TipoStruct;
 import ast.types.IntTipo;
 import ast.types.RealTipo;
 import ast.types.Type;
-import ast.types.VoidTipo;
+import ast.types.TipoVoid;
 import main.GestorErrores;
 import visitor.DefaultVisitor;
 
@@ -60,7 +60,7 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 	public Object visit(DefFuncion node, Object param) {
 
 		node.getTipo().accept(this, param);
-		visitChildren(node.getDefParametros(), param);
+		//visitChildren(node.getDefParametros(), param);
 		if(!esVoid(node.getTipo()) && !esSimple(((TipoFuncion)node.getTipo()).getTipoRetorno()))
 			gestorErrores.error("Fase tipos","Error: Retorno de tipo no simple "+node.getTipo(), node.getStart());
 		visitChildren(node.getDefVarLocal(), param);
@@ -146,7 +146,7 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 		super.visit(node, param);
 		if (getTipoFuncion((Type) param) == null)
 			gestorErrores.error("Fase tipos","el return no debe funcionar en tipoVoid", node.getStart());
-		else if (!(getTipoFuncion((Type) param) instanceof VoidTipo) && node.getExpresion() == null)
+		else if (!(getTipoFuncion((Type) param) instanceof TipoVoid) && node.getExpresion() == null)
 			gestorErrores.error("Fase tipos","debe haber un valor de retorno ", node.getStart());
 		else if (node.getExpresion() != null && !mismoTipo(node.getExpresion().getTipo(), getTipoFuncion((Type) param)))
 			gestorErrores.error("Fase tipos","el retorno no coincide con "
@@ -160,7 +160,7 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 		super.visit(node, param);
 
 		if(node.getDefFuncion().getTipo() instanceof TipoFuncion) {
-			if (!isArgumentosValido(node.getDefFuncion().getDefParametros(), node.getArgumentos()))
+	//		if (!isArgumentosValido(node.getDefFuncion().getDefParametros(), node.getArgumentos()))
 				gestorErrores.error("Fase tipos","los argumentos y los parametros no coinciden", node.getStart());
 
 		} else {
@@ -231,8 +231,8 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 
 		super.visit(node, param);
 		Type type = node.getIdent().getTipo();
-		if (type != null && type instanceof ArrayTipo) {
-		    ArrayTipo tipoArray = (ArrayTipo) node.getIdent().getTipo();
+		if (type != null && type instanceof TipoArray) {
+		    TipoArray tipoArray = (TipoArray) node.getIdent().getTipo();
 		    node.setTipo(tipoArray.getTipo());
 		} else
 			gestorErrores.error("Fase tipos","debe ser de tipo array", node.getStart());
@@ -274,7 +274,7 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 	public Object visit(LlamadaFuncion node, Object param) {
 		super.visit(node, param);
 		if(node.getDefFuncion().getTipo() instanceof TipoFuncion) {
-		if (!isArgumentosValido(node.getDefFuncion().getDefParametros(), node.getArgumentos()))
+	//	if (!isArgumentosValido(node.getDefFuncion().getDefParametros(), node.getArgumentos()))
 			gestorErrores.error("Fase tipos","los argumentos y los parametros no coinciden", node.getStart());
 
 		    node.setTipo(((TipoFuncion) node.getDefFuncion().getTipo()).getTipoRetorno());
@@ -331,7 +331,7 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 	}
 
 	private boolean esVoid(Type tipo){
-		if(tipo instanceof VoidTipo)
+		if(tipo instanceof TipoVoid)
 			return true;
 		else
 			return false;

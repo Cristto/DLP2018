@@ -8,9 +8,9 @@ import visitor.*;
 
 //	voidTipo:type -> 
 
-public class VoidTipo extends AbstractType {
+public class TipoVoid extends AbstractType {
 	
-	public VoidTipo(){
+	public TipoVoid(){
 		
 		searchForPositions();
 	}

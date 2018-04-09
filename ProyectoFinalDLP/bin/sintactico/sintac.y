@@ -48,12 +48,10 @@ defVariablesOpt: defVariablesOpt defVariable  {$$ = $1; ((List)$1).add($2);}
 
 defVariable: 'VAR' 'IDENT' ':' tipo ';' {$$ = new DefVariable($2,$4);}
 
-defFuncion: 'IDENT' '(' parametrosOpt ')' retornoOpt '{' defVariablesOpt sentenciasOpt '}' {$$ = new DefFuncion($1,new TipoFuncion($5, $3),$7,$8);}
+defFuncion: 'IDENT' '(' parametrosOpt ')' ':' tipo '{' defVariablesOpt sentenciasOpt '}' {$$ = new DefFuncion($1,new TipoFuncion($6, $3),$3,$8,$9);}
+	|		'IDENT' '(' parametrosOpt ')' '{' defVariablesOpt sentenciasOpt '}' {$$ = new DefFuncion($1,new TipoFuncion(new TipoVoid(), $3),$3,$6,$7);}
 	;
 
-retornoOpt: ':' tipo {$$ = new TipoFuncion($2);}
-	|				 {$$ = new VoidTipo();}
-	;
 parametrosOpt: defParametros 	{$$ = $1;}
 	|							{$$ = new ArrayList<Definition>();}				
 	;
@@ -76,7 +74,7 @@ tipo: 'INT' 				{$$ = IntTipo.getInstance();}
  |	'REAL'					{$$ = RealTipo.getInstance();}
  |	'CHAR'					{$$ = CharTipo.getInstance();}
  |	'IDENT'					{$$ = new TipoStruct($1);}
- |	'[' 'LITENT' ']' tipo	{$$ = new ArrayTipo($2,$4);}
+ |	'[' 'LITENT' ']' tipo	{$$ = new TipoArray($2,$4);}
  ;
 
 sentenciasOpt: sentenciasOpt sentencia    {$$ = $1; ((List)$1).add($2);}

@@ -44,16 +44,6 @@
 <span class="dots">·  ·  |  </span>"<span class="value">dobleSuma</span>"  
 <span class="dots">·  ·  |  </span>FuncionTipo &rarr;                                      <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
 <span class="dots">·  ·  |  ·  </span><span class="value">IntTipo</span> &rarr;                                       <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
-<span class="dots">·  ·  |  </span>defParametros  <span class="type">List&lt;Definition&gt;</span> = 
-<span class="dots">·  ·  |  ·  </span>DefVariable &rarr;                                   <span class="pos">20:11  20:11 </span><span class="sourceText">dobleSuma(</span><span class="posText">z</span><span class="sourceText">:int, b:int, z:float): int { // Parámetro 'z' repetido ('b' no colisiona con global) da fallo la b</span>
-<span class="dots">·  ·  |  ·  |  </span>"<span class="value">z</span>"  
-<span class="dots">·  ·  |  ·  |  </span><span class="value">IntTipo</span> &rarr;                                    <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
-<span class="dots">·  ·  |  ·  </span>DefVariable &rarr;                                   <span class="pos">20:18  20:18 </span><span class="sourceText">dobleSuma(z:int, </span><span class="posText">b</span><span class="sourceText">:int, z:float): int { // Parámetro 'z' repetido ('b' no colisiona con global) da fallo la b</span>
-<span class="dots">·  ·  |  ·  |  </span>"<span class="value">b</span>"  
-<span class="dots">·  ·  |  ·  |  </span><span class="value">IntTipo</span> &rarr;                                    <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
-<span class="dots">·  ·  |  ·  </span>DefVariable &rarr;                                   <span class="pos">20:25  20:25 </span><span class="sourceText">dobleSuma(z:int, b:int, </span><span class="posText">z</span><span class="sourceText">:float): int { // Parámetro 'z' repetido ('b' no colisiona con global) da fallo la b</span>
-<span class="dots">·  ·  |  ·  |  </span>"<span class="value">z</span>"  
-<span class="dots">·  ·  |  ·  |  </span><span class="value">RealTipo</span> &rarr;                                   <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
 <span class="dots">·  ·  |  </span>defVarLocal  <span class="type">List&lt;Definition&gt;</span> = 
 <span class="dots">·  ·  |  ·  </span>DefVariable &rarr;                                   <span class="pos">21:9  21:14  </span><span class="sourceText">var </span><span class="posText">local1</span><span class="sourceText">:int;</span>
 <span class="dots">·  ·  |  ·  |  </span>"<span class="value">local1</span>"  
@@ -83,8 +73,8 @@
 <span class="dots">·  ·  |  ·  |  </span>"local2"  <span class="type">Variable.ident</span>                     <span class="pos">31:11  31:16 </span><span class="sourceText">print </span><span class="posText">local2</span><span class="sourceText">;    </span>
 <span class="dots">·  ·  </span>DefFuncion &rarr;                                          <span class="pos">34:1  36:16  </span><span class="sourceText"></span><span class="posText">prueba() {</span><span class="sourceText"> ... </span><span class="posText">print local2</span><span class="sourceText">;    // Error: es local de la función anterior</span>
 <span class="dots">·  ·  |  </span>"<span class="value">prueba</span>"  
-<span class="dots">·  ·  |  </span><span class="value">VoidTipo</span> &rarr;                                         <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
-<span class="dots">·  ·  |  </span>defParametros  <span class="type">List&lt;Definition&gt;</span> = 
+<span class="dots">·  ·  |  </span>FuncionTipo &rarr;                                      <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
+<span class="dots">·  ·  |  ·  </span><span class="value">VoidTipo</span> &rarr;                                      <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
 <span class="dots">·  ·  |  </span>defVarLocal  <span class="type">List&lt;Definition&gt;</span> = 
 <span class="dots">·  ·  |  </span>sentencias  <span class="type">List&lt;Statement&gt;</span> = 
 <span class="dots">·  ·  |  ·  </span>Print &rarr;                                         <span class="pos">35:11  35:11 </span><span class="sourceText">print </span><span class="posText">z</span><span class="sourceText">;    // Error: es parámetro de la función anterior</span>
@@ -93,8 +83,8 @@
 <span class="dots">·  ·  |  ·  |  </span>"local2"  <span class="type">Variable.ident</span>                     <span class="pos">36:11  36:16 </span><span class="sourceText">print </span><span class="posText">local2</span><span class="sourceText">;    // Error: es local de la función anterior</span>
 <span class="dots">·  ·  </span>DefFuncion &rarr;                                          <span class="pos">40:1  41:17  </span><span class="sourceText"></span><span class="posText">main() {</span><span class="sourceText"> ... </span><span class="posText">dobleSuma(5.6</span><span class="sourceText">);    // No es error en esta fase aunque no coincidan parámetros </span>
 <span class="dots">·  ·  |  </span>"<span class="value">main</span>"  
-<span class="dots">·  ·  |  </span><span class="value">VoidTipo</span> &rarr;                                         <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
-<span class="dots">·  ·  |  </span>defParametros  <span class="type">List&lt;Definition&gt;</span> = 
+<span class="dots">·  ·  |  </span>FuncionTipo &rarr;                                      <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
+<span class="dots">·  ·  |  ·  </span><span class="value">VoidTipo</span> &rarr;                                      <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
 <span class="dots">·  ·  |  </span>defVarLocal  <span class="type">List&lt;Definition&gt;</span> = 
 <span class="dots">·  ·  |  </span>sentencias  <span class="type">List&lt;Statement&gt;</span> = 
 <span class="dots">·  ·  |  ·  </span>Invocacion &rarr;                                    <span class="pos">41:5  41:17  </span><span class="sourceText"></span><span class="posText">dobleSuma(5.6</span><span class="sourceText">);    // No es error en esta fase aunque no coincidan parámetros </span>

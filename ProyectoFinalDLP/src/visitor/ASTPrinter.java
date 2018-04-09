@@ -33,13 +33,13 @@ import ast.statements.Printsp;
 import ast.statements.Read;
 import ast.statements.Return;
 import ast.statements.While;
-import ast.types.ArrayTipo;
+import ast.types.TipoArray;
 import ast.types.CharTipo;
 import ast.types.TipoFuncion;
 import ast.types.TipoStruct;
 import ast.types.IntTipo;
 import ast.types.RealTipo;
-import ast.types.VoidTipo;
+import ast.types.TipoVoid;
 
 import java.util.*;
 
@@ -161,7 +161,7 @@ public class ASTPrinter extends DefaultVisitor {
 
 		print(indent + 1, "ident", "String", node.getNombre());
 		visit(indent + 1, "tipo", "Type",node.getTipo());
-		visit(indent + 1, "defParametros", "List<Definition>",node.getDefParametros());
+		//visit(indent + 1, "defParametros", "List<Definition>",node.getDefParametros());
 		visit(indent + 1, "defVarLocal", "List<Definition>",node.getDefVarLocal());
 		visit(indent + 1, "sentencias", "List<Statement>",node.getSentencias());
 		return null;
@@ -458,7 +458,7 @@ public class ASTPrinter extends DefaultVisitor {
 	}
 
 	//	class ArrayTipo { int size;  Type tipo; }
-	public Object visit(ArrayTipo node, Object param) {
+	public Object visit(TipoArray node, Object param) {
 		int indent = ((Integer)param).intValue();
 
 		printName(indent, "ArrayTipo", node, false);
@@ -479,7 +479,7 @@ public class ASTPrinter extends DefaultVisitor {
 	}
 
 	//	class VoidTipo {  }
-	public Object visit(VoidTipo node, Object param) {
+	public Object visit(TipoVoid node, Object param) {
 		int indent = ((Integer)param).intValue();
 
 		printName(indent, "VoidTipo", node, true);

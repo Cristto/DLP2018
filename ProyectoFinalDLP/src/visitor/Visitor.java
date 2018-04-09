@@ -31,13 +31,13 @@ import ast.statements.Printsp;
 import ast.statements.Read;
 import ast.statements.Return;
 import ast.statements.While;
-import ast.types.ArrayTipo;
+import ast.types.TipoArray;
 import ast.types.CharTipo;
 import ast.types.TipoFuncion;
 import ast.types.TipoStruct;
 import ast.types.IntTipo;
 import ast.types.RealTipo;
-import ast.types.VoidTipo;
+import ast.types.TipoVoid;
 
 public interface Visitor {
 	public Object visit(Program node, Object param);
@@ -71,7 +71,7 @@ public interface Visitor {
 	public Object visit(RealTipo node, Object param);
 	public Object visit(CharTipo node, Object param);
 	public Object visit(TipoStruct node, Object param);
-	public Object visit(ArrayTipo node, Object param);
+	public Object visit(TipoArray node, Object param);
 	public Object visit(TipoFuncion node, Object param);
-	public Object visit(VoidTipo node, Object param);
+	public Object visit(TipoVoid node, Object param);
 }

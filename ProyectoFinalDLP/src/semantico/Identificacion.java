@@ -1,5 +1,8 @@
 package semantico;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import ast.Position;
 import ast.definitions.DefCampo;
 import ast.definitions.DefFuncion;
@@ -10,9 +13,8 @@ import ast.expressions.LlamadaFuncion;
 import ast.expressions.Variable;
 import ast.statements.Invocacion;
 import ast.statements.Return;
-import ast.types.ArrayTipo;
+import ast.types.TipoArray;
 import ast.types.TipoStruct;
-import ast.types.VoidTipo;
 import main.GestorErrores;
 import semantico.context.ContextMap;
 import visitor.DefaultVisitor;
@@ -21,11 +23,11 @@ import visitor.DefaultVisitor;
 public class Identificacion extends DefaultVisitor {
 	
 	private GestorErrores gestorErrores;
-	private ContextMap<String, DefFuncion> funciones = new ContextMap<String,DefFuncion>();
+	private Map<String, DefFuncion> funciones = new HashMap<String,DefFuncion>();
 	//todos en la pila de variables
 	private ContextMap<String, DefVariable> variables = new ContextMap<String,DefVariable>();
-	private ContextMap<String, DefStruct> structs = new ContextMap<String,DefStruct>();
-	private ContextMap<String, DefCampo> campos = new ContextMap<String,DefCampo>();
+	private Map<String, DefStruct> structs = new HashMap<String,DefStruct>();
+	private Map<String, DefCampo> campos = new HashMap<String,DefCampo>();
 
 	public Identificacion(GestorErrores gestor) {
 		this.gestorErrores = gestor;
@@ -48,7 +50,7 @@ public class Identificacion extends DefaultVisitor {
 		//predicado(funciones.getFromAny(node.getIdent()) == null, "funcion repetida", node.getStart());
 		//funciones.put(node.getIdent(), node);
 		
-		if (funciones.getFromAny(node.getNombre()) != null) {
+		if (funciones.get(node.getNombre()) != null) {
 		    gestorErrores.error("Identificacion", "Funcion " + node.getNombre() + " ya definida", node.getStart());
 		} else {
 		    funciones.put(node.getNombre(), node);
@@ -67,10 +69,10 @@ public class Identificacion extends DefaultVisitor {
 		
 		//predicado(funciones.getFromAny(node.getIdent()) != null, "Procedimiento no definido", node.getStart());
 		//node.setDefFuncion(funciones.getFromAny(node.getIdent()));
-		if (funciones.getFromAny(node.getIdent()) == null)
+		if (funciones.get(node.getIdent()) == null)
 			gestorErrores.error("Identificacion" , "Funcion " + node.getIdent() + " no definida", node.getStart());
 		else
-		    node.setDefFuncion(funciones.getFromAny(node.getIdent()));
+		    node.setDefFuncion(funciones.get(node.getIdent()));
 		
 		
 		super.visit(node, param);
@@ -78,10 +80,10 @@ public class Identificacion extends DefaultVisitor {
 	}
 	
 	public Object visit(LlamadaFuncion node, Object param){
-		if(funciones.getFromAny(node.getIdent()) == null)
+		if(funciones.get(node.getIdent()) == null)
 			gestorErrores.error("Identificación", "Función no definida", node.getStart());
 		else			
-			node.setDefFuncion(funciones.getFromAny(node.getIdent()));
+			node.setDefFuncion(funciones.get(node.getIdent()));
 		
 		super.visit(node, param);
 		return null;
@@ -119,7 +121,7 @@ public class Identificacion extends DefaultVisitor {
 	
 	public Object visit(DefStruct node, Object param) {
 		
-		DefStruct defStruct = structs.getFromAny(node.getNombre());
+		DefStruct defStruct = structs.get(node.getNombre());
 		
 		if(defStruct == null)
 			structs.put(node.getNombre(), node);
@@ -145,7 +147,7 @@ public class Identificacion extends DefaultVisitor {
 	public Object visit(DefCampo node, Object param){
 		
 				
-		DefCampo defCampo = campos.getFromTop(node.getNombre());
+		DefCampo defCampo = campos.get(node.getNombre());
 		
 		if(defCampo == null)
 			campos.put(node.getNombre(), node);
@@ -158,17 +160,17 @@ public class Identificacion extends DefaultVisitor {
 		return null;
 	}
 	
-	public Object visit(ArrayTipo node, Object param) {
+	public Object visit(TipoArray node, Object param) {
 		node.getTipo().accept(this, param);
 		return null;
 	}
 	
 	public Object visit(TipoStruct node, Object param) {
 		
-		if(structs.getFromAny(node.getValor()) == null)
+		if(structs.get(node.getValor()) == null)
 			gestorErrores.error("Identidicacion", node.getValor()+" no definido", node.getStart());
 		else
-			node.setDefstruct(structs.getFromAny(node.getValor()));
+			node.setDefstruct(structs.get(node.getValor()));
 		
 		//predicado(structs.getFromAny(node.getValor()) != null,"no definido",node.getStart());
 		//node.setDefstruct(structs.getFromAny(node.getValor()));
@@ -179,8 +181,8 @@ public class Identificacion extends DefaultVisitor {
 	public Object visit(Return node, Object param) {
 		if (node.getExpresion() != null)
 		    node.getExpresion().accept(this, param);
-		else
-		    node.setTipo(new VoidTipo());
+		/*else
+		    node.setTipo(new TipoVoid());*/
 		return null;
 	    }
 	
