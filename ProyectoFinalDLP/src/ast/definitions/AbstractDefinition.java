@@ -5,14 +5,14 @@
 package ast.definitions;
 
 import ast.AbstractTraceable;
-import ast.types.Type;
+import ast.types.Tipo;
 
 public abstract class AbstractDefinition extends AbstractTraceable implements Definition {
 
 	private String nombre;
-	private Type tipo;
+	private Tipo tipo;
 
-	protected AbstractDefinition(String nombre, Type tipo) {
+	protected AbstractDefinition(String nombre, Tipo tipo) {
 		super();
 		this.nombre = nombre;
 		this.tipo = tipo;
@@ -24,7 +24,7 @@ public abstract class AbstractDefinition extends AbstractTraceable implements De
 	}
 
 	@Override
-	public Type getTipo() {
+	public Tipo getTipo() {
 		return tipo;
 	}
 }

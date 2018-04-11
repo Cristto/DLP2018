@@ -6,7 +6,7 @@ package ast.types;
 
 import ast.AST;
 
-public interface Type extends AST {
+public interface Tipo extends AST {
 	
 	
 

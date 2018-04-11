@@ -26,6 +26,7 @@ struct Persona {
 
 var juan:Persona;
 var anton:Persona;
+var f:int;
 
 g():Persona {	// Error: Retorno de tipo no simple
 

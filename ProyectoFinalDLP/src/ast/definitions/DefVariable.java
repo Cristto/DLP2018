@@ -5,14 +5,14 @@
 package ast.definitions;
 
 import ast.Token;
-import ast.types.Type;
+import ast.types.Tipo;
 import visitor.*;
 
 //	defVariable:definition -> ident:String  tipo:type
 
 public class DefVariable extends AbstractDefinition {
 
-	public DefVariable(String ident, Type tipo) {
+	public DefVariable(String ident, Tipo tipo) {
 	
 		super(ident ,tipo);
 
@@ -21,7 +21,7 @@ public class DefVariable extends AbstractDefinition {
 
 	public DefVariable(Object ident, Object tipo) {
 		
-		super((ident instanceof Token) ? ((Token) ident).getLexeme() : (String) ident, (Type) tipo);
+		super((ident instanceof Token) ? ((Token) ident).getLexeme() : (String) ident, (Tipo) tipo);
 
 		searchForPositions(ident, tipo);	// Obtener linea/columna a partir de los hijos
 	}

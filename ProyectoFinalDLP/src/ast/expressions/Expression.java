@@ -5,7 +5,7 @@
 package ast.expressions;
 
 import ast.AST;
-import ast.types.Type;
+import ast.types.Tipo;
 
 public interface Expression extends AST {
 
@@ -13,8 +13,8 @@ public interface Expression extends AST {
 
 	void setLvalue(boolean lvalue);
 	
-	public Type getTipo();
-	public void setTipo(Type tipo);
+	public Tipo getTipo();
+	public void setTipo(Tipo tipo);
 
 }
 

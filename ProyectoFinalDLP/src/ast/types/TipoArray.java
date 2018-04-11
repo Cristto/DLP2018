@@ -11,7 +11,7 @@ import visitor.*;
 
 public class TipoArray extends AbstractType {
 
-	public TipoArray(int indice, Type tipo) {
+	public TipoArray(int indice, Tipo tipo) {
 		this.size = indice;
 		this.tipo = tipo;
 
@@ -20,7 +20,7 @@ public class TipoArray extends AbstractType {
 
 	public TipoArray(Object size, Object tipo) {
 		this.size = (size instanceof Token) ? Integer.parseInt(((Token)size).getLexeme()) : (Integer) size;
-		this.tipo = (Type) tipo;
+		this.tipo = (Tipo) tipo;
 
 		searchForPositions(size, tipo);	// Obtener linea/columna a partir de los hijos
 	}
@@ -32,10 +32,10 @@ public class TipoArray extends AbstractType {
 		this.size = size;
 	}
 
-	public Type getTipo() {
+	public Tipo getTipo() {
 		return tipo;
 	}
-	public void setTipo(Type tipo) {
+	public void setTipo(Tipo tipo) {
 		this.tipo = tipo;
 	}
 
@@ -45,6 +45,6 @@ public class TipoArray extends AbstractType {
 	}
 
 	private int size;
-	private Type tipo;
+	private Tipo tipo;
 }
 

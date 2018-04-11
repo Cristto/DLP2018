@@ -13,7 +13,7 @@ import visitor.*;
 
 public class TipoFuncion extends AbstractType {
 
-	public TipoFuncion(Type tipoRetorno, List<Definition> defParametros) {
+	public TipoFuncion(Tipo tipoRetorno, List<Definition> defParametros) {
 		this.tipoRetorno = tipoRetorno;
 		this.defParametros = defParametros;
 
@@ -22,16 +22,16 @@ public class TipoFuncion extends AbstractType {
 
 	@SuppressWarnings("unchecked")
 	public TipoFuncion(Object tipoRetorno, Object defParametros) {
-		this.tipoRetorno = (Type) tipoRetorno;
+		this.tipoRetorno = (Tipo) tipoRetorno;
 		this.defParametros = (List<Definition>) defParametros;
 
 		searchForPositions(tipoRetorno);	// Obtener linea/columna a partir de los hijos
 	}
 
-	public Type getTipoRetorno() {
+	public Tipo getTipoRetorno() {
 		return tipoRetorno;
 	}
-	public void setTipoRetorno(Type tipoRetorno) {
+	public void setTipoRetorno(Tipo tipoRetorno) {
 		this.tipoRetorno = tipoRetorno;
 	}
 	public List<Definition> getDefParametros() {
@@ -46,7 +46,7 @@ public class TipoFuncion extends AbstractType {
 		return v.visit(this, param);
 	}
 
-	private Type tipoRetorno;
+	private Tipo tipoRetorno;
 	private List<Definition> defParametros;
 }
 

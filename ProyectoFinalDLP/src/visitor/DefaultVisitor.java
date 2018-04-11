@@ -73,6 +73,8 @@ public class DefaultVisitor implements Visitor {
 
 	//	class DefStruct { String ident;  List<Definition> campos; }
 	public Object visit(DefStruct node, Object param) {
+		if (node.getTipo() != null)
+			node.getTipo().accept(this, param);
 		visitChildren(node.getCampos(), param);
 		return null;
 	}
@@ -274,6 +276,7 @@ public class DefaultVisitor implements Visitor {
 	public Object visit(TipoFuncion node, Object param) {
 		if (node.getTipoRetorno() != null)
 			node.getTipoRetorno().accept(this, param);
+		visitChildren(node.getDefParametros(), param);
 		return null;
 	}
 

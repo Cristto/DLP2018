@@ -6,7 +6,7 @@ package ast.types;
 
 import ast.AbstractTraceable;
 
-public abstract class AbstractType extends AbstractTraceable implements Type {
+public abstract class AbstractType extends AbstractTraceable implements Tipo {
 
 }
 

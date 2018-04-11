@@ -5,7 +5,7 @@
 package ast.types;
 
 import ast.Token;
-import ast.definitions.DefStruct;
+import ast.definitions.Definition;
 import visitor.Visitor;
 
 //	IdentTipo:type -> valor:String
@@ -29,12 +29,12 @@ public class TipoStruct extends AbstractType {
 		this.valor = valor;
 	}
 	
-	public DefStruct getDefstruct() {
+	public Definition getDefstruct() {
 		return defstruct;
 	}
 	
-	public void setDefstruct(DefStruct defstruct) {
-		this.defstruct = defstruct;
+	public void setDefstruct(Definition def) {
+		this.defstruct = def;
 	}
 
 	@Override
@@ -43,6 +43,6 @@ public class TipoStruct extends AbstractType {
 	}
 
 	private String valor;
-	private DefStruct defstruct;
+	private Definition defstruct;
 }
 

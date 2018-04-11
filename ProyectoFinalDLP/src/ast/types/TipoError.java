@@ -3,7 +3,7 @@ package ast.types;
 import ast.Position;
 import visitor.Visitor;
 
-public class TipoError implements Type{
+public class TipoError implements Tipo{
 
 	@Override
 	public Object accept(Visitor visitor, Object param) {

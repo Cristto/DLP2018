@@ -7,14 +7,14 @@ package ast.definitions;
 import java.util.List;
 
 import ast.Token;
-import ast.types.Type;
+import ast.types.Tipo;
 import visitor.Visitor;
 
 //	defStruct:definition -> ident:String  campos:definition*
 
 public class DefStruct extends AbstractDefinition {
 
-	public DefStruct(String ident, Type tipo, List<Definition> campos) {
+	public DefStruct(String ident, Tipo tipo, List<Definition> campos) {
 		super(ident, tipo);
 		
 		this.campos = campos;
@@ -24,7 +24,7 @@ public class DefStruct extends AbstractDefinition {
 
 	@SuppressWarnings("unchecked")
 	public DefStruct(Object ident, Object tipo, Object campos) {
-		super((ident instanceof Token) ? ((Token) ident).getLexeme() : (String) ident, (Type) tipo);
+		super((ident instanceof Token) ? ((Token) ident).getLexeme() : (String) ident, (Tipo) tipo);
 		this.campos = (List<Definition>) campos;
 
 		searchForPositions(ident, campos);	// Obtener linea/columna a partir de los hijos

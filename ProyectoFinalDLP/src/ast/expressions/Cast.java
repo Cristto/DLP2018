@@ -4,14 +4,14 @@
 
 package ast.expressions;
 
-import ast.types.Type;
+import ast.types.Tipo;
 import visitor.*;
 
 //	cast:expression -> tipo:type  expresion:expression
 
 public class Cast extends AbstractExpression {
 
-	public Cast(Type tipo, Expression expresion) {
+	public Cast(Tipo tipo, Expression expresion) {
 		this.tipoDinamico = tipo;
 		this.expresion = expresion;
 
@@ -19,17 +19,17 @@ public class Cast extends AbstractExpression {
 	}
 
 	public Cast(Object tipo, Object expresion) {
-		this.tipoDinamico = (Type) tipo;
+		this.tipoDinamico = (Tipo) tipo;
 		this.expresion = (Expression) expresion;
 
 		searchForPositions(tipo, expresion);	// Obtener linea/columna a partir de los hijos
 	}
 	
-	public Type getTipoDinamico() {
+	public Tipo getTipoDinamico() {
 		return tipoDinamico;
 	}
 	
-	public void setTipoDinamico(Type tipoDinamico) {
+	public void setTipoDinamico(Tipo tipoDinamico) {
 		this.tipoDinamico = tipoDinamico;
 	}
 
@@ -45,7 +45,7 @@ public class Cast extends AbstractExpression {
 		return v.visit(this, param);
 	}
 
-	private Type tipoDinamico;
+	private Tipo tipoDinamico;
 	private Expression expresion;
 }
 

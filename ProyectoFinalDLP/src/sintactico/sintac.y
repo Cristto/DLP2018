@@ -48,8 +48,8 @@ defVariablesOpt: defVariablesOpt defVariable  {$$ = $1; ((List)$1).add($2);}
 
 defVariable: 'VAR' 'IDENT' ':' tipo ';' {$$ = new DefVariable($2,$4);}
 
-defFuncion: 'IDENT' '(' parametrosOpt ')' ':' tipo '{' defVariablesOpt sentenciasOpt '}' {$$ = new DefFuncion($1,new TipoFuncion($6, $3),$3,$8,$9);}
-	|		'IDENT' '(' parametrosOpt ')' '{' defVariablesOpt sentenciasOpt '}' {$$ = new DefFuncion($1,new TipoFuncion(new TipoVoid(), $3),$3,$6,$7);}
+defFuncion: 'IDENT' '(' parametrosOpt ')' ':' tipo '{' defVariablesOpt sentenciasOpt '}' {$$ = new DefFuncion($1,new TipoFuncion($6, $3),$8,$9);}
+	|		'IDENT' '(' parametrosOpt ')' '{' defVariablesOpt sentenciasOpt '}' {$$ = new DefFuncion($1,new TipoFuncion(new TipoVoid(), $3),$6,$7);}
 	;
 
 parametrosOpt: defParametros 	{$$ = $1;}
@@ -58,7 +58,7 @@ parametrosOpt: defParametros 	{$$ = $1;}
 defParametros: defParametros ',' defParametro	{$$=$1;  ((List)$$).add($3); }
 		|	   defParametro		{$$= new ArrayList<Definition>(); ((List)$$).add($1); }  
 		;
-defParametro: 'IDENT' ':' tipo 		{$$ = new DefVariable($1,$3);}
+defParametro: 'IDENT' ':' tipoSimple 		{$$ = new DefVariable($1,$3);}
 	;
 
 defStruct: 'STRUCT' 'IDENT' '{' camposOpt '}' ';' {$$ = new DefStruct($2,new TipoStruct($2),$4);}
@@ -70,11 +70,14 @@ camposOpt: camposOpt defCampo  { $$ = $1; ((List)$1).add($2);}
 defCampo: 'IDENT' ':' tipo ';' {$$ = new DefCampo($1,$3);}
 	;
 
-tipo: 'INT' 				{$$ = IntTipo.getInstance();}
- |	'REAL'					{$$ = RealTipo.getInstance();}
- |	'CHAR'					{$$ = CharTipo.getInstance();}
+tipo: tipoSimple			{ $$ = $1; }
  |	'IDENT'					{$$ = new TipoStruct($1);}
  |	'[' 'LITENT' ']' tipo	{$$ = new TipoArray($2,$4);}
+ ;
+ 
+tipoSimple: 'INT' 				{$$ = IntTipo.getInstance();}
+ |	'REAL'					{$$ = RealTipo.getInstance();}
+ |	'CHAR'					{$$ = CharTipo.getInstance();}
  ;
 
 sentenciasOpt: sentenciasOpt sentencia    {$$ = $1; ((List)$1).add($2);}

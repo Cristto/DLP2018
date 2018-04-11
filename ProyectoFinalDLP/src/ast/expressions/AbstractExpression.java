@@ -5,12 +5,12 @@
 package ast.expressions;
 
 import ast.AbstractTraceable;
-import ast.types.Type;
+import ast.types.Tipo;
 
 public abstract class AbstractExpression extends AbstractTraceable implements Expression {
 
 	private boolean lvalue;
-	private Type tipo;
+	private Tipo tipo;
 	
 	@Override
     public boolean isLvalue() {
@@ -23,12 +23,12 @@ public abstract class AbstractExpression extends AbstractTraceable implements Ex
     }
     
     @Override
-    public Type getTipo() {
+    public Tipo getTipo() {
     	return tipo;
     }
     
     @Override
-    public void setTipo(Type tipo) {
+    public void setTipo(Tipo tipo) {
     	this.tipo = tipo;
     	
     }

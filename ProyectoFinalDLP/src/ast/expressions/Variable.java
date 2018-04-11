@@ -5,7 +5,7 @@
 package ast.expressions;
 
 import ast.Token;
-import ast.definitions.DefVariable;
+import ast.definitions.Definition;
 import visitor.*;
 
 //	variable:expression -> ident:String
@@ -29,12 +29,12 @@ public class Variable extends AbstractExpression {
 		this.ident = ident;
 	}
 	
-	public DefVariable getDefVariable() {
+	public Definition getDefVariable() {
 		return defVariable;
 	}
 	
-	public void setDefVariable(DefVariable defVariable) {
-		this.defVariable = defVariable;
+	public void setDefVariable(Definition def) {
+		this.defVariable = def;
 	}
 
 	@Override
@@ -43,6 +43,6 @@ public class Variable extends AbstractExpression {
 	}
 
 	private String ident;
-	private DefVariable defVariable;
+	private Definition defVariable;
 }
 
