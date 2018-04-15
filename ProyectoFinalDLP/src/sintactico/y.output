@@ -23,7 +23,7 @@
   14  defParametros : defParametros ',' defParametro
   15                | defParametro
 
-  16  defParametro : "IDENT" ':' tipoSimple
+  16  defParametro : "IDENT" ':' tipo
 
   17  defStruct : "STRUCT" "IDENT" '{' camposOpt '}' ';'
 
@@ -204,7 +204,7 @@ state 13
 
 
 state 14
-	defParametro : "IDENT" . ':' tipoSimple  (16)
+	defParametro : "IDENT" . ':' tipo  (16)
 
 	':'  shift 26
 	.  error
@@ -286,14 +286,17 @@ state 25
 
 
 state 26
-	defParametro : "IDENT" ':' . tipoSimple  (16)
+	defParametro : "IDENT" ':' . tipo  (16)
 
+	'['  shift 19
+	"IDENT"  shift 20
 	"INT"  shift 21
 	"REAL"  shift 22
 	"CHAR"  shift 23
 	.  error
 
-	tipoSimple  goto 32
+	tipo  goto 32
+	tipoSimple  goto 25
 
 
 state 27
@@ -339,7 +342,7 @@ state 31
 
 
 state 32
-	defParametro : "IDENT" ':' tipoSimple .  (16)
+	defParametro : "IDENT" ':' tipo .  (16)
 
 	.  reduce 16
 

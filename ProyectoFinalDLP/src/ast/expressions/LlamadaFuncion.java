@@ -7,7 +7,7 @@ package ast.expressions;
 import java.util.*;
 
 import ast.Token;
-import ast.definitions.Definition;
+import ast.definitions.DefFuncion;
 import visitor.*;
 
 //	llamadaFuncion:expression -> ident:String  argumentos:expression*
@@ -43,10 +43,10 @@ public class LlamadaFuncion extends AbstractExpression {
 		this.argumentos = argumentos;
 	}
 	
-	public Definition getDefFuncion() {
+	public DefFuncion getDefFuncion() {
 		return defFuncion;
 	}
-	public void setDefFuncion(Definition def) {
+	public void setDefFuncion(DefFuncion def) {
 		this.defFuncion = def;
 	}
 
@@ -57,6 +57,6 @@ public class LlamadaFuncion extends AbstractExpression {
 
 	private String ident;
 	private List<Expression> argumentos;
-	private Definition defFuncion;
+	private DefFuncion defFuncion;
 }
 

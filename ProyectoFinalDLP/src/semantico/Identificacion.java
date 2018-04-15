@@ -18,11 +18,13 @@ public class Identificacion extends DefaultVisitor {
 	
 	private GestorErrores gestorErrores;
 	//todos en la pila de variables
-	private ContextMap<String, Definition> ids;
+	private ContextMap<String, Definition> defVars;
+	private ContextMap<String, DefFuncion> defFuncs;
 
 	public Identificacion(GestorErrores gestor) {
 		this.gestorErrores = gestor;
-		ids = new ContextMap<String,Definition>();
+		defVars = new ContextMap<String,Definition>();
+		defFuncs = new ContextMap<String,DefFuncion>();
 	}	
 	
 	/*
@@ -36,20 +38,20 @@ public class Identificacion extends DefaultVisitor {
 	
 	public Object visit(DefFuncion node, Object param) {
 		
-		if (ids.getFromTop(node.getNombre()) != null) {
+		if (defFuncs.getFromTop(node.getNombre()) != null) {
 		    gestorErrores.error("Identificacion", "Funcion " + node.getNombre() + " ya definida", node.getStart());
 		} else {
-			ids.put(node.getNombre(), node);
+			defFuncs.put(node.getNombre(), node);
 		}
 		
-		ids.set();
+		defVars.set();
 		super.visit(node, param);
-		ids.reset();
+		defVars.reset();
 		return null;
 	}
 	
 	public Object visit(Invocacion node, Object param){
-		Definition def = ids.getFromAny(node.getIdent());
+		DefFuncion def = defFuncs.getFromAny(node.getIdent());
 		if (def == null)
 			gestorErrores.error("Identificacion" , "Funcion " + node.getIdent() + " no definida", node.getStart());
 		else
@@ -60,7 +62,7 @@ public class Identificacion extends DefaultVisitor {
 	}
 	
 	public Object visit(LlamadaFuncion node, Object param){
-		Definition def = ids.getFromAny(node.getIdent());
+		DefFuncion def = defFuncs.getFromAny(node.getIdent());
 		if(def == null)
 			gestorErrores.error("Identificación", "Función no definida", node.getStart());
 		else			
@@ -73,8 +75,8 @@ public class Identificacion extends DefaultVisitor {
 	
 	public Object visit(DefVariable node, Object param){
 		
-		if(ids.getFromTop(node.getNombre()) ==  null){
-			ids.put(node.getNombre(), node);
+		if(defVars.getFromTop(node.getNombre()) ==  null){
+			defVars.put(node.getNombre(), node);
 			super.visit(node, param);
 		}
 		else
@@ -85,7 +87,7 @@ public class Identificacion extends DefaultVisitor {
 	
 	public Object visit(Variable node, Object param){
 		
-		Definition def = ids.getFromAny(node.getIdent());
+		Definition def = defVars.getFromAny(node.getIdent());
 		if (def == null)
 			gestorErrores.error("Identificación", node.getIdent()+" variable no definida", node.getStart());
 		else
@@ -95,8 +97,8 @@ public class Identificacion extends DefaultVisitor {
 	}
 	
 	public Object visit(DefStruct node, Object param) {		
-		if(ids.getFromTop(node.getNombre()) == null) {
-			ids.put(node.getNombre(), node);
+		if(defVars.getFromTop(node.getNombre()) == null) {
+			defVars.put(node.getNombre(), node);
 			super.visit(node, param);
 		}
 		else
@@ -109,8 +111,8 @@ public class Identificacion extends DefaultVisitor {
 	
 	public Object visit(DefCampo node, Object param){
 		
-		if(ids.getFromTop(node.getNombre()) == null) {
-			ids.put(node.getNombre(), node);
+		if(defVars.getFromTop(node.getNombre()) == null) {
+			defVars.put(node.getNombre(), node);
 			super.visit(node, param);
 		}
 		else
@@ -121,7 +123,7 @@ public class Identificacion extends DefaultVisitor {
 	
 	public Object visit(TipoStruct node, Object param) {
 		
-		Definition def = ids.getFromAny(node.getValor());
+		Definition def = defVars.getFromAny(node.getValor());
 		
 		if(def == null)
 			gestorErrores.error("Identidicacion", node.getValor()+" no definido", node.getStart());

@@ -58,7 +58,7 @@ parametrosOpt: defParametros 	{$$ = $1;}
 defParametros: defParametros ',' defParametro	{$$=$1;  ((List)$$).add($3); }
 		|	   defParametro		{$$= new ArrayList<Definition>(); ((List)$$).add($1); }  
 		;
-defParametro: 'IDENT' ':' tipoSimple 		{$$ = new DefVariable($1,$3);}
+defParametro: 'IDENT' ':' tipo 		{$$ = new DefVariable($1,$3);}
 	;
 
 defStruct: 'STRUCT' 'IDENT' '{' camposOpt '}' ';' {$$ = new DefStruct($2,new TipoStruct($2),$4);}

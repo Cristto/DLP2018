@@ -21,11 +21,15 @@ public class AnalisisSemantico {
 	}
 	
 	public void analiza(AST raiz) {
+		
 		Identificacion identificacion = new Identificacion(gestorErrores);
 		raiz.accept(identificacion, null);
 
 		if (gestorErrores.hayErrores())
 			return;
+
+		Lvalue lvalue = new Lvalue(gestorErrores);
+		raiz.accept(lvalue, null);
 
 		ComprobacionDeTipos comprobación = new ComprobacionDeTipos(gestorErrores);
 		raiz.accept(comprobación, null);

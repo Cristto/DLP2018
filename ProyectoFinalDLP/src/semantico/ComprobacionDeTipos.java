@@ -61,6 +61,10 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 	// }
 	public Object visit(DefFuncion node, Object param) {
 		node.getTipo().accept(this, param);
+		if (!esSimple(((TipoFuncion) node.getTipo()).getTipoRetorno())
+				&& !esVoid(((TipoFuncion) node.getTipo()).getTipoRetorno())) {
+			gestorErrores.error("Fase tipos", "el tipo de retorno no es de tipo simple", node.getStart());
+		}
 		visitChildren(node.getDefVarLocal(), param);
 		visitChildren(node.getSentencias(), getTipoRetorno(node.getTipo()));
 
@@ -142,14 +146,14 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 	public Object visit(Return node, Object param) {
 
 		super.visit(node, param);
-		if (esSimple((Tipo) param)) {
-			if (!mismoTipo((Tipo) param, node.getExpresion().getTipo())) {
-				gestorErrores.error("Fase tipos", "el retorno no coincide con " + "el retorno de la funcion ",
-						node.getStart());
-			}
-		} else if (esVoid((Tipo) param)) {
-			if (node.getExpresion() != null) {
+		if (node.getExpresion() == null) {
+			if (!esVoid((Tipo) param)) {
 				gestorErrores.error("Fase tipos", "el return no debe funcionar en tipoVoid", node.getStart());
+			}
+		} else {
+			if (!mismoTipo((Tipo) param, node.getExpresion().getTipo())) {
+				gestorErrores.error("Fase tipos", "el retorno no coincide con el retorno de la funcion ",
+						node.getStart());
 			}
 		}
 
@@ -256,9 +260,9 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 	public Object visit(AccesoArray node, Object param) {
 
 		super.visit(node, param);
-		if(node.getIdent().getTipo() instanceof TipoArray) {
-			if(node.getIndex().getTipo() instanceof IntTipo){
-				node.setTipo(node.getIdent().getTipo());
+		if (node.getIdent().getTipo() instanceof TipoArray) {
+			if (node.getIndex().getTipo() instanceof IntTipo) {
+				node.setTipo(((TipoArray)node.getIdent().getTipo()).getTipo());
 			} else {
 				node.setTipo(new TipoError());
 				gestorErrores.error("Fase tipos", "el indice debe ser de tipo" + "entero", node.getStart());
@@ -273,8 +277,9 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 	// class AccesoStruct { Expression ident; String campo; }
 	public Object visit(AccesoStruct node, Object param) {
 		super.visit(node, param);
-		if(node.getIdent().getTipo() instanceof TipoStruct) {
-			node.setTipo(getCampo((DefStruct) ((TipoStruct) node.getIdent().getTipo()).getDefstruct(), node.getCampo()));
+		if (node.getIdent().getTipo() instanceof TipoStruct) {
+			node.setTipo(
+					getCampo((DefStruct) ((TipoStruct) node.getIdent().getTipo()).getDefstruct(), node.getCampo()));
 		} else {
 			node.setTipo(new TipoError());
 			gestorErrores.error("Fase tipos", "debe ser de tipo array", node.getStart());
@@ -315,6 +320,9 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 		if (!esSimple(node.getExpresion().getTipo()))
 			gestorErrores.error("Fase tipos", "las expresiones que se castean" + "deben ser de tipo simple",
 					node.getStart());
+		if (mismoTipo(node.getExpresion().getTipo(), node.getTipoDinamico()))
+			gestorErrores.error("Fase tipos", "los tipos del cast han de ser diferentes",
+					node.getStart());
 		// Si hay errores el tipo del cast deberia ser tipoError
 		/*
 		 * if (mismoTipo(node.getTipo(), node.getExpresion().getTipo()))
@@ -342,6 +350,19 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 	public Object visit(LitChar node, Object param) {
 		node.setTipo(CharTipo.getInstance());
 
+		return null;
+	}
+
+	@Override
+	public Object visit(TipoFuncion node, Object param) {
+		if (node.getTipoRetorno() != null)
+			node.getTipoRetorno().accept(this, param);
+		for (Definition defParam : node.getDefParametros()) {
+			defParam.accept(this, param);
+			if (!esSimple(defParam.getTipo())) {
+				gestorErrores.error("Fase tipos", "los parametros deben de ser de tipo Simple", defParam.getStart());
+			}
+		}
 		return null;
 	}
 
@@ -403,10 +424,10 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 			return true;
 		}
 	}
-	
+
 	private Tipo getCampo(DefStruct def, String field) {
 		for (Definition fieldDef : def.getCampos()) {
-			if(fieldDef.getNombre().equals(field))
+			if (fieldDef.getNombre().equals(field))
 				return fieldDef.getTipo();
 		}
 		return new TipoError();

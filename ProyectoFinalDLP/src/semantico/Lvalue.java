@@ -13,11 +13,21 @@ import ast.expressions.LlamadaFuncion;
 import ast.expressions.MenosUnario;
 import ast.expressions.Not;
 import ast.expressions.Variable;
+import ast.statements.Asignacion;
+import ast.statements.Read;
+import ast.types.TipoFuncion;
+import main.GestorErrores;
 import visitor.DefaultVisitor;
 
 public class Lvalue extends DefaultVisitor{
 	
-	 @Override
+	 private GestorErrores gestorErrores;
+
+	public Lvalue(GestorErrores gestorErrores) {
+		this.gestorErrores = gestorErrores;
+	}
+
+	@Override
 	    public Object visit(AccesoArray node, Object param) {
 		node.setLvalue(true);
 		return super.visit(node, param);
@@ -94,5 +104,23 @@ public class Lvalue extends DefaultVisitor{
 		return super.visit(node, param);
 	    }
 
-
+	    @Override
+	    public Object visit(Asignacion node, Object param) {
+	    	super.visit(node, param);
+	    	if(!node.getLeftExpr().isLvalue()) {
+	    		gestorErrores.error("Fase lvalue", "la expresion de la izquierda no es modificable ",
+						node.getStart());
+	    	}
+	    	return null;
+	    }
+	    
+	    @Override
+	    public Object visit(Read node, Object param) {
+	    	super.visit(node, param);
+	    	if(!node.getExpresion().isLvalue()) {
+	    		gestorErrores.error("Fase lvalue", "la expresion no es modificable ",
+						node.getStart());
+	    	}
+	    	return null;
+	    }
 }

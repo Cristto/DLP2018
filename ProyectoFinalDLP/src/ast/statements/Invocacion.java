@@ -7,7 +7,7 @@ package ast.statements;
 import java.util.*;
 
 import ast.Token;
-import ast.definitions.Definition;
+import ast.definitions.DefFuncion;
 import ast.expressions.Expression;
 import visitor.*;
 
@@ -37,11 +37,11 @@ public class Invocacion extends AbstractStatement {
 		this.ident = ident;
 	}
 	
-	public Definition getDefFuncion() {
+	public DefFuncion getDefFuncion() {
 		return defFuncion;
 	}
 	
-	public void setDefFuncion(Definition def) {
+	public void setDefFuncion(DefFuncion def) {
 		this.defFuncion = def;
 	}
 
@@ -59,6 +59,6 @@ public class Invocacion extends AbstractStatement {
 
 	private String ident;
 	private List<Expression> argumentos;
-	private Definition defFuncion;
+	private DefFuncion defFuncion;
 }
 
