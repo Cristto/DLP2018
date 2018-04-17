@@ -44,5 +44,12 @@ public class TipoStruct extends AbstractType {
 
 	private String valor;
 	private Definition defstruct;
+	
+	
+	@Override
+	public String getNombreMapl() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
 

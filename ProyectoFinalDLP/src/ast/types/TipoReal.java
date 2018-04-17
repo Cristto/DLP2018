@@ -8,22 +8,27 @@ import visitor.*;
 
 //	realTipo:type -> 
 
-public class RealTipo extends AbstractType {
+public class TipoReal extends AbstractType {
 	
-private static RealTipo instance = null;
+private static TipoReal instance = null;
 	
-	private RealTipo() {
+	private TipoReal() {
 	}
 	
-	public static RealTipo getInstance() {
+	public static TipoReal getInstance() {
 		if(instance == null)
-			instance = new RealTipo();
+			instance = new TipoReal();
 		return instance;
 	}
 
 	@Override
 	public Object accept(Visitor v, Object param) { 
 		return v.visit(this, param);
+	}
+
+	@Override
+	public String getNombreMapl() {
+		return "double";
 	}
 
 }

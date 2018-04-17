@@ -32,11 +32,11 @@ import ast.statements.Read;
 import ast.statements.Return;
 import ast.statements.While;
 import ast.types.TipoArray;
-import ast.types.CharTipo;
+import ast.types.TipoChar;
 import ast.types.TipoFuncion;
 import ast.types.TipoStruct;
-import ast.types.IntTipo;
-import ast.types.RealTipo;
+import ast.types.TipoInt;
+import ast.types.TipoReal;
 import ast.types.TipoVoid;
 
 import java.util.*;
@@ -246,17 +246,17 @@ public class DefaultVisitor implements Visitor {
 	}
 
 	//	class IntTipo {  }
-	public Object visit(IntTipo node, Object param) {
+	public Object visit(TipoInt node, Object param) {
 		return null;
 	}
 
 	//	class RealTipo {  }
-	public Object visit(RealTipo node, Object param) {
+	public Object visit(TipoReal node, Object param) {
 		return null;
 	}
 
 	//	class CharTipo {  }
-	public Object visit(CharTipo node, Object param) {
+	public Object visit(TipoChar node, Object param) {
 		return null;
 	}
 

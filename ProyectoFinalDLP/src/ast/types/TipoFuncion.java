@@ -48,5 +48,9 @@ public class TipoFuncion extends AbstractType {
 
 	private Tipo tipoRetorno;
 	private List<Definition> defParametros;
+	@Override
+	public String getNombreMapl() {
+		return tipoRetorno.getNombreMapl();
+	}
 }
 

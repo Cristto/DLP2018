@@ -8,22 +8,27 @@ import visitor.*;
 
 //	intTipo:type -> 
 
-public class IntTipo extends AbstractType {
+public class TipoInt extends AbstractType {
 	
-private static IntTipo instance = null;
+private static TipoInt instance = null;
 	
-	private IntTipo() {
+	private TipoInt() {
 	}
 	
-	public static IntTipo getInstance() {
+	public static TipoInt getInstance() {
 		if(instance == null)
-			instance = new IntTipo();
+			instance = new TipoInt();
 		return instance;
 	}
 
 	@Override
 	public Object accept(Visitor v, Object param) { 
 		return v.visit(this, param);
+	}
+
+	@Override
+	public String getNombreMapl() {
+		return "int";
 	}
 
 }

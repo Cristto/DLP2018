@@ -23,4 +23,10 @@ public class TipoError implements Tipo{
 		return null;
 	}
 
+	@Override
+	public String getNombreMapl() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

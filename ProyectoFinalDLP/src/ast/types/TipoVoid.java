@@ -20,5 +20,10 @@ public class TipoVoid extends AbstractType {
 		return v.visit(this, param);
 	}
 
+	@Override
+	public String getNombreMapl() {
+		return "void";
+	}
+
 }
 

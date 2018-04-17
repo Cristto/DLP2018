@@ -34,11 +34,11 @@ import ast.statements.Read;
 import ast.statements.Return;
 import ast.statements.While;
 import ast.types.TipoArray;
-import ast.types.CharTipo;
+import ast.types.TipoChar;
 import ast.types.TipoFuncion;
 import ast.types.TipoStruct;
-import ast.types.IntTipo;
-import ast.types.RealTipo;
+import ast.types.TipoInt;
+import ast.types.TipoReal;
 import ast.types.TipoVoid;
 
 import java.util.*;
@@ -423,7 +423,7 @@ public class ASTPrinter extends DefaultVisitor {
 	}
 
 	//	class IntTipo {  }
-	public Object visit(IntTipo node, Object param) {
+	public Object visit(TipoInt node, Object param) {
 		int indent = ((Integer)param).intValue();
 
 		printName(indent, "IntTipo", node, true);
@@ -432,7 +432,7 @@ public class ASTPrinter extends DefaultVisitor {
 	}
 
 	//	class RealTipo {  }
-	public Object visit(RealTipo node, Object param) {
+	public Object visit(TipoReal node, Object param) {
 		int indent = ((Integer)param).intValue();
 
 		printName(indent, "RealTipo", node, true);
@@ -441,7 +441,7 @@ public class ASTPrinter extends DefaultVisitor {
 	}
 
 	//	class CharTipo {  }
-	public Object visit(CharTipo node, Object param) {
+	public Object visit(TipoChar node, Object param) {
 		int indent = ((Integer)param).intValue();
 
 		printName(indent, "CharTipo", node, true);

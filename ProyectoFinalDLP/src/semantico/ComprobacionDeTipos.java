@@ -35,11 +35,11 @@ import ast.statements.Return;
 import ast.statements.While;
 import ast.types.TipoArray;
 import ast.types.TipoError;
-import ast.types.CharTipo;
+import ast.types.TipoChar;
 import ast.types.TipoFuncion;
 import ast.types.TipoStruct;
-import ast.types.IntTipo;
-import ast.types.RealTipo;
+import ast.types.TipoInt;
+import ast.types.TipoReal;
 import ast.types.Tipo;
 import ast.types.TipoVoid;
 import main.GestorErrores;
@@ -201,7 +201,7 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 		super.visit(node, param);
 		if (esComparable(node.getLeftExpr().getTipo())) {
 			if (mismoTipo(node.getLeftExpr().getTipo(), node.getRightExpr().getTipo())) {
-				node.setTipo(IntTipo.getInstance());
+				node.setTipo(TipoInt.getInstance());
 			} else {
 				node.setTipo(new TipoError());
 				gestorErrores.error("Fase tipos", "Los operandos deben ser del mismo tipo ", node.getStart());
@@ -220,7 +220,7 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 		super.visit(node, param);
 		if (esLogico(node.getLeftExpr().getTipo())) {
 			if (mismoTipo(node.getLeftExpr().getTipo(), node.getRightExpr().getTipo())) {
-				node.setTipo(IntTipo.getInstance());
+				node.setTipo(TipoInt.getInstance());
 			} else {
 				node.setTipo(new TipoError());
 				gestorErrores.error("Fase tipos", "Los operandos deben ser del mismo tipo ", node.getStart());
@@ -252,7 +252,7 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 			node.setTipo(new TipoError());
 			gestorErrores.error("Fase tipos", "debe ser de tipo entero", node.getStart());
 		} else
-			node.setTipo(IntTipo.getInstance());
+			node.setTipo(TipoInt.getInstance());
 		return null;
 	}
 
@@ -261,7 +261,7 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 
 		super.visit(node, param);
 		if (node.getIdent().getTipo() instanceof TipoArray) {
-			if (node.getIndex().getTipo() instanceof IntTipo) {
+			if (node.getIndex().getTipo() instanceof TipoInt) {
 				node.setTipo(((TipoArray)node.getIdent().getTipo()).getTipo());
 			} else {
 				node.setTipo(new TipoError());
@@ -334,21 +334,21 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 
 	// class LitInt { int valor; }
 	public Object visit(LitInt node, Object param) {
-		node.setTipo(IntTipo.getInstance());
+		node.setTipo(TipoInt.getInstance());
 
 		return null;
 	}
 
 	// class LitReal { float valor; }
 	public Object visit(LitReal node, Object param) {
-		node.setTipo(RealTipo.getInstance());
+		node.setTipo(TipoReal.getInstance());
 
 		return null;
 	}
 
 	// class LitChar { char valor; }
 	public Object visit(LitChar node, Object param) {
-		node.setTipo(CharTipo.getInstance());
+		node.setTipo(TipoChar.getInstance());
 
 		return null;
 	}
@@ -367,7 +367,7 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 	}
 
 	private boolean esSimple(Tipo tipo) {
-		if (tipo instanceof IntTipo || tipo instanceof RealTipo || tipo instanceof CharTipo)
+		if (tipo instanceof TipoInt || tipo instanceof TipoReal || tipo instanceof TipoChar)
 			return true;
 		else
 			return false;
@@ -381,21 +381,21 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 	}
 
 	private boolean esAritmetico(Tipo tipo) {
-		if (tipo instanceof IntTipo || tipo instanceof RealTipo)
+		if (tipo instanceof TipoInt || tipo instanceof TipoReal)
 			return true;
 		else
 			return false;
 	}
 
 	private boolean esComparable(Tipo tipo) {
-		if (tipo instanceof IntTipo || tipo instanceof RealTipo)
+		if (tipo instanceof TipoInt || tipo instanceof TipoReal)
 			return true;
 		else
 			return false;
 	}
 
 	private boolean esLogico(Tipo tipo) {
-		if (tipo instanceof IntTipo)
+		if (tipo instanceof TipoInt)
 			return true;
 		else
 			return false;

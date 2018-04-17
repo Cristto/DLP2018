@@ -46,5 +46,9 @@ public class TipoArray extends AbstractType {
 
 	private int size;
 	private Tipo tipo;
+	@Override
+	public String getNombreMapl() {
+		return size + "*" + tipo.getNombreMapl();
+	}
 }
 

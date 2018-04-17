@@ -865,15 +865,15 @@ case 23:
 break;
 case 24:
 //#line 78 "sintac.y"
-{yyval = IntTipo.getInstance();}
+{yyval = TipoInt.getInstance();}
 break;
 case 25:
 //#line 79 "sintac.y"
-{yyval = RealTipo.getInstance();}
+{yyval = TipoReal.getInstance();}
 break;
 case 26:
 //#line 80 "sintac.y"
-{yyval = CharTipo.getInstance();}
+{yyval = TipoChar.getInstance();}
 break;
 case 27:
 //#line 83 "sintac.y"
